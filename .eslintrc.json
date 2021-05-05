@@ -15,6 +15,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-props-no-spreading": [1, { "custom": "ignore" }]
+    "react/jsx-props-no-spreading": [1, { "custom": "ignore" }],
+    "camelcase": "off"
   }
 }
