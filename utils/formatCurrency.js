@@ -13,7 +13,7 @@ const formatCurrency = (amount, currencyCode) => {
   const { symbolOnLeft, spaceBetweenAmountAndSymbol } = currencyFormatter.findCurrency(currency);
 
   if (amount < 1) {
-    const formattedNumber = amount.toPrecision(2);
+    const formattedNumber = parseFloat(amount.toFixed(4));
     return symbolOnLeft
       ? `${currencySymbol}${spaceBetweenAmountAndSymbol ? ' ' : ''}${formattedNumber}`
       : `${formattedNumber}${spaceBetweenAmountAndSymbol ? ' ' : ''}${currencySymbol}`;

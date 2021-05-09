@@ -4,6 +4,7 @@ import { enableScreens } from 'react-native-screens';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 import { useSelector } from 'react-redux';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import themes from './styles/themes';
 
@@ -25,9 +26,11 @@ const AppContainer = () => {
   return (
     <>
       <StatusBar style={theme.dark ? 'light' : 'dark'} />
-      <NavigationContainer theme={theme}>
-        <RootNavigator />
-      </NavigationContainer>
+      <ActionSheetProvider>
+        <NavigationContainer theme={theme}>
+          <RootNavigator />
+        </NavigationContainer>
+      </ActionSheetProvider>
     </>
   );
 };

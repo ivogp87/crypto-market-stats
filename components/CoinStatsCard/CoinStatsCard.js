@@ -55,7 +55,7 @@ const CoinStatsCard = ({
             {name}
           </AppText>
           <AppText size="small" color="secondary" style={styles.coinSymbol}>
-            {`${rank}. ${symbol}`}
+            {`${rank ? `${rank} .` : ''}${symbol}`}
           </AppText>
         </View>
       </View>
@@ -81,9 +81,11 @@ const CoinStatsCard = ({
           <AppText bold numberOfLines={1}>
             {formatCurrency(price, referenceCurrency)}
           </AppText>
-          <AppText size="small" color="secondary" numberOfLines={1}>
-            MC {formatAndAbbreviateCurrency(marketCap, referenceCurrency)}
-          </AppText>
+          {marketCap !== null && (
+            <AppText size="small" color="secondary" numberOfLines={1}>
+              MC {formatAndAbbreviateCurrency(marketCap, referenceCurrency)}
+            </AppText>
+          )}
         </View>
         <Pressable onPress={onFavorite} hitSlop={16}>
           <Ionicons
@@ -102,11 +104,11 @@ CoinStatsCard.propTypes = {
   onPress: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   symbol: PropTypes.string.isRequired,
-  rank: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  rank: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   iconUrl: PropTypes.string.isRequired,
   priceChangePercent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  marketCap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  marketCap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   sparklineData: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   referenceCurrency: PropTypes.string.isRequired,
   isFavorite: PropTypes.bool.isRequired,
@@ -114,8 +116,11 @@ CoinStatsCard.propTypes = {
 };
 
 CoinStatsCard.defaultProps = {
+  rank: null,
   priceChangePercent: null,
+  price: null,
   sparklineData: null,
+  marketCap: null,
 };
 
 export default CoinStatsCard;

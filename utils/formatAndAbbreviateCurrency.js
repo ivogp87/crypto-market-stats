@@ -10,8 +10,8 @@ const formatAndAbbreviateCurrency = (amount, currencyCode) => {
 
   const { currency } = Localization || 'USD';
   const { symbolOnLeft, spaceBetweenAmountAndSymbol } = currencyFormatter.findCurrency(currency);
-
-  const shortNumber = amount > 1 ? abbreviateNumber(amount) : amount.toPrecision(2);
+  const digits = amount < 0.01 ? 4 : 2;
+  const shortNumber = amount < 1000 ? parseFloat(amount.toFixed(digits)) : abbreviateNumber(amount);
   const currencySymbol = getCurrencySymbol(currencyCode);
 
   return symbolOnLeft

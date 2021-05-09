@@ -1,11 +1,11 @@
 import coinGecko from './axiosConfig';
 
 // eslint-disable-next-line import/prefer-default-export
-export const fetchCoinList = (
+export const fetchCoins = (
   referenceCurrency,
   orderBy,
   page = 1,
-  includeSparkline = true,
+  includeSparkline,
   category,
   resultsPerPage = 100,
   priceChangePercentage = '1h,24h,7d'

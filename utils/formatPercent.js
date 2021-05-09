@@ -1,7 +1,7 @@
 const formatPercent = (number) => {
   if (number === null) return 'n/a';
-
-  return `${number > 0 ? '+' : ''}${number.toPrecision(2)} %`;
+  const digits = Math.abs(number) < 0.01 ? 4 : 2;
+  return `${number > 0 ? '+' : ''}${parseFloat(number.toFixed(digits))} %`;
 };
 
 export default formatPercent;

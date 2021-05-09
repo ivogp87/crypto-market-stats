@@ -1,30 +1,13 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { font } from '../../styles';
-import { useColors } from '../../hooks';
+import themedStyles from './styles';
+import { useStyles } from '../../hooks';
 
 const AppText = ({ size, color, bold, style, children, ...rest }) => {
-  const { textPrimary, textSecondary, success, info, warning, danger } = useColors();
-  const fontSize = size === 'extra large' ? font.xLarge : font[size];
-
-  const colors = {
-    primary: textPrimary,
-    secondary: textSecondary,
-    success,
-    info,
-    warning,
-    danger,
-  };
-
+  const styles = useStyles(themedStyles, size, color, bold);
   return (
-    <Text
-      style={StyleSheet.compose(
-        { fontSize, fontWeight: bold ? 'bold' : 'normal', color: colors[color] },
-        style
-      )}
-      {...rest}
-    >
+    <Text style={StyleSheet.compose(styles.text, style)} {...rest}>
       {children}
     </Text>
   );

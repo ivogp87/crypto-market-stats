@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import HomeNavigator from '../HomeNavigator';
-import { coinListScreenOptions } from '../../screens/CoinListScreen';
+import { coinsScreenOptions } from '../../screens/CoinsScreen';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +11,7 @@ const getScreenOptions = (navData) => {
   const routeName = getFocusedRouteNameFromRoute(navData.route);
   switch (routeName) {
     default:
-      return coinListScreenOptions(navData);
+      return coinsScreenOptions(navData);
   }
 };
 

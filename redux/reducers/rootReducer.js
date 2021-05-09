@@ -3,7 +3,7 @@ import { persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import coinListReducer from './coinListReducer';
+import coinsReducer from './coinsReducer';
 import settingsReducer from './settingsReducer';
 
 const rootPersistConfig = {
@@ -14,7 +14,7 @@ const rootPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-  coinList: coinListReducer,
+  coins: coinsReducer,
   settings: settingsReducer,
 });
 

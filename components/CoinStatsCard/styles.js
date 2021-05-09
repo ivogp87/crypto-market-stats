@@ -12,7 +12,8 @@ const themedStyles = (colors) =>
 
     coinBranding: {
       width: '35%',
-      paddingHorizontal: spacing.small,
+      paddingLeft: spacing.small,
+      paddingRight: spacing.medium,
       flexDirection: 'row',
       alignItems: 'center',
     },
@@ -35,7 +36,8 @@ const themedStyles = (colors) =>
 
     priceContainer: {
       width: '35%',
-      paddingHorizontal: spacing.small,
+      paddingLeft: spacing.medium,
+      paddingRight: spacing.small,
       flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'center',

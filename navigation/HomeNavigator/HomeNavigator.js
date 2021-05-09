@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import CoinListScreen, { coinListScreenOptions } from '../../screens/CoinListScreen';
+import CoinsScreen, { coinsScreenOptions } from '../../screens/CoinsScreen';
 
 const Tab = createBottomTabNavigator();
 
 const HomeNavigator = () => (
   <Tab.Navigator>
-    <Tab.Screen name="Coin List" component={CoinListScreen} options={coinListScreenOptions} />
+    <Tab.Screen name="Coin List" component={CoinsScreen} options={coinsScreenOptions} />
   </Tab.Navigator>
 );
 

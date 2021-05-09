@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyleSheet } from 'react-native';
 
 import { iconSize } from '../../styles';
+import { stylePropTypes } from '../../utils';
 
 import CachedImage from '../CachedImage';
 
@@ -20,8 +21,6 @@ const Logo = ({ url, id, size, style }) => {
         {
           width: dimensions,
           height: dimensions,
-          resizeMode: 'center',
-          overflow: 'hidden',
         },
         style
       )}
@@ -32,14 +31,14 @@ const Logo = ({ url, id, size, style }) => {
 Logo.propTypes = {
   url: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
-  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  style: stylePropTypes,
   id: PropTypes.string.isRequired,
 };
 
 Logo.defaultProps = {
   url: null,
   size: 'medium',
-  style: {},
+  style: null,
 };
 
 export default Logo;

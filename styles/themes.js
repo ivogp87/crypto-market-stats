@@ -31,7 +31,7 @@ const darkTheme = {
     text: '#E5E5E5',
     border: '#113236',
     card: '#142136',
-    notification: '#802919',
+    notification: '#C62D22',
     bgPrimary: '#020C1B',
     bgSecondary: '#142136',
     textPrimary: '#E5E5E5',
@@ -42,7 +42,7 @@ const darkTheme = {
     info: '#4C7ECF',
     success: '#597022',
     warning: '#B0B007',
-    danger: '#A43420',
+    danger: '#C62D22',
   },
 };
 

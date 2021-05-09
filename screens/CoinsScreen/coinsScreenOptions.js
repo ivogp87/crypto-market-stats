@@ -6,8 +6,8 @@ import { Item } from 'react-navigation-header-buttons';
 
 import AppHeaderButtons from '../../components/AppHeaderButtons';
 
-const coinListScreenOptions = () => ({
-  headerTitle: 'Cryptocurrency Prices',
+const coinsScreenOptions = () => ({
+  headerTitle: 'Cryptocurrency Stats',
   headerRight: () => (
     <AppHeaderButtons>
       <Item
@@ -27,4 +27,4 @@ const coinListScreenOptions = () => ({
   ),
 });
 
-export default coinListScreenOptions;
+export default coinsScreenOptions;
