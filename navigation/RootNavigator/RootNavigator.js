@@ -3,25 +3,26 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import HomeNavigator from '../HomeNavigator';
-import { coinsScreenOptions } from '../../screens/CoinsScreen';
+import {
+  coinsStackNavigatorOptions,
+  favoriteCoinsStackNavigatorOptions,
+} from '../../screens/CoinsScreen';
 
 const Stack = createStackNavigator();
 
 const getScreenOptions = (navData) => {
   const routeName = getFocusedRouteNameFromRoute(navData.route);
   switch (routeName) {
+    case 'Favorite Coins':
+      return favoriteCoinsStackNavigatorOptions(navData);
     default:
-      return coinsScreenOptions(navData);
+      return coinsStackNavigatorOptions(navData);
   }
 };
 
 const RootNavigator = () => (
   <Stack.Navigator>
-    <Stack.Screen
-      name="Home"
-      component={HomeNavigator}
-      options={(navData) => getScreenOptions(navData)}
-    />
+    <Stack.Screen name="Home" component={HomeNavigator} options={getScreenOptions} />
   </Stack.Navigator>
 );
 

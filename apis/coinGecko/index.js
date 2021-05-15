@@ -1,2 +1,1 @@
-// eslint-disable-next-line import/prefer-default-export
-export { fetchCoins } from './coinGecko';
+export { fetchCoins, fetchCoinsById } from './coinGecko';
