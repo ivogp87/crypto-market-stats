@@ -6,6 +6,8 @@ Mobile app which shows statistics about the cryptocurrency market.
 
 - View the price, market cap and price change for thousands of cryptocurrencies
 - Sort the information by price, market cap, category
+- Add cryptocurrencies to favorites
+- View statistics for crypto exchanges
 - Light and dark mode
 - More features coming soon...
 
@@ -46,7 +48,7 @@ You can forward other props to the callback as well, for more advanced usage see
 
 **How it works**
 
-The app uses React Navigation's `NavigationContainer` as a theme provider (which uses React Context under the hood). The _theme name_ is stored in the redux store and saved in AsyncStorage with Redux Persist.
+The app uses React Navigation's `NavigationContainer` as a theme provider (which uses Context under the hood). The _theme name_ is stored in the redux store and saved in AsyncStorage with Redux Persist.
 
 A theme is a JS object containing the following properties: name (`string`), dark (`boolean`) and colors (`object`).
 When creating a custom theme, you will need to provide all [properties required by React Navigation](https://reactnavigation.org/docs/themes) plus some additional colors. The themes are stored in [./styles/themes.js](https://github.com/ivogp87/crypto-market-stats/blob/main/styles/themes.js).

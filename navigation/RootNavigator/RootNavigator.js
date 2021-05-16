@@ -7,6 +7,7 @@ import {
   coinsStackNavigatorOptions,
   favoriteCoinsStackNavigatorOptions,
 } from '../../screens/CoinsScreen';
+import { exchangesStackNavigatorOptions } from '../../screens/ExchangesScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,8 @@ const getScreenOptions = (navData) => {
   switch (routeName) {
     case 'Favorite Coins':
       return favoriteCoinsStackNavigatorOptions(navData);
+    case 'Exchanges':
+      return exchangesStackNavigatorOptions(navData);
     default:
       return coinsStackNavigatorOptions(navData);
   }

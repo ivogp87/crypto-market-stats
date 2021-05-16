@@ -25,3 +25,8 @@ export const fetchCoinsById = (
   coinGecko.get(
     `/coins/markets?ids=${coinIds.join()}&vs_currency=${referenceCurrency}&order=${orderBy}&sparkline=${includeSparkline}&price_change_percentage=${priceChangePercentage}`
   );
+
+export const fetchExchanges = (page = 1, resultsPerPage = 100) =>
+  coinGecko.get(`/exchanges?page=${page}&per_page=${resultsPerPage}`);
+
+export const fetchBtcExchangeRates = () => coinGecko.get('/exchange_rates');

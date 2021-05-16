@@ -5,6 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import coinsReducer from './coinsReducer';
 import favoriteCoinsReducer from './favoriteCoinsReducer';
+import exchangesReducer from './exchangesReducer';
+import btcExchangeRatesReducer from './btcExchangeRatesReducer';
 import settingsReducer from './settingsReducer';
 
 const rootPersistConfig = {
@@ -17,6 +19,8 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   coins: coinsReducer,
   favoriteCoins: favoriteCoinsReducer,
+  exchanges: exchangesReducer,
+  btcExchangeRates: btcExchangeRatesReducer,
   settings: settingsReducer,
 });
 

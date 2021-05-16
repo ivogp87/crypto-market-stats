@@ -1,1 +1,1 @@
-export { fetchCoins, fetchCoinsById } from './coinGecko';
+export * from './coinGecko';
