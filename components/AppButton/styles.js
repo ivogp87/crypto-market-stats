@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { spacing, iconSize, font } from '../../styles';
+import { font } from '../../styles';
 
 const themedStyles = (colors, size, color, rounded, stretch) => {
   const { textPrimary, bgPrimary, bgSecondary, info, warning, danger, success, ripple } = colors;
@@ -18,7 +18,8 @@ const themedStyles = (colors, size, color, rounded, stretch) => {
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: stretch ? 'stretch' : 'baseline',
-      padding: spacing.small,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
       backgroundColor: buttonColors[color],
       borderRadius: rounded ? 16 : 4,
       overflow: 'hidden',
@@ -31,9 +32,9 @@ const themedStyles = (colors, size, color, rounded, stretch) => {
       fontSize: size === 'small' ? font.medium : font.large,
     },
 
-    iconLeft: { marginRight: spacing.xSmall, color: textPrimary, fontSize: iconSize.small },
+    iconLeft: { marginRight: 4, color: textPrimary, fontSize: 16 },
 
-    iconRight: { marginLeft: spacing.xSmall, color: textPrimary, fontSize: iconSize.small },
+    iconRight: { marginLeft: 4, color: textPrimary, fontSize: 16 },
   });
 };
 

@@ -1,19 +1,19 @@
 import { StyleSheet } from 'react-native';
-import { spacing } from '../../styles';
+
+export const coinStatsCardHeight = 56;
 
 const themedStyles = (colors) =>
   StyleSheet.create({
     container: {
       flexDirection: 'row',
-      paddingVertical: spacing.small,
+      paddingVertical: 8,
       backgroundColor: colors.bgPrimary,
-      height: 56,
+      height: coinStatsCardHeight,
     },
 
     coinBranding: {
       width: '35%',
-      paddingLeft: spacing.small,
-      paddingRight: spacing.medium,
+      paddingHorizontal: 16,
       flexDirection: 'row',
       alignItems: 'center',
     },
@@ -21,7 +21,7 @@ const themedStyles = (colors) =>
     coinNames: {
       alignSelf: 'stretch',
       justifyContent: 'space-between',
-      paddingLeft: spacing.small,
+      paddingLeft: 8,
     },
 
     coinSymbol: {
@@ -36,8 +36,7 @@ const themedStyles = (colors) =>
 
     priceContainer: {
       width: '35%',
-      paddingLeft: spacing.medium,
-      paddingRight: spacing.small,
+      paddingHorizontal: 16,
       flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'center',
@@ -47,7 +46,7 @@ const themedStyles = (colors) =>
       alignSelf: 'stretch',
       justifyContent: 'space-between',
       alignItems: 'flex-end',
-      paddingRight: spacing.small,
+      paddingRight: 8,
     },
   });
 

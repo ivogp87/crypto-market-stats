@@ -1,14 +1,13 @@
 import { StyleSheet } from 'react-native';
-import { spacing } from '../../styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: spacing.medium,
+    paddingVertical: 16,
   },
 
   buttonGroup: {
-    marginBottom: spacing.medium,
+    marginBottom: 16,
   },
 
   coins: {
@@ -17,14 +16,14 @@ const styles = StyleSheet.create({
 
   emptyFavoritesList: {
     flex: 1,
-    padding: spacing.medium,
+    padding: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   loadMoreButton: {
-    marginTop: spacing.medium,
-    marginHorizontal: spacing.small,
+    marginTop: 16,
+    marginHorizontal: 16,
   },
 });
 

@@ -5,7 +5,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { VictoryLine, VictoryContainer } from 'victory-native';
 
 import themedStyles from './styles';
-import { iconSize } from '../../styles';
 import { useStyles, useColors } from '../../hooks';
 import { formatCurrency, formatPercent, formatAndAbbreviateCurrency } from '../../utils';
 
@@ -55,7 +54,7 @@ const CoinStatsCard = ({
             {name}
           </AppText>
           <AppText size="small" color="secondary" style={styles.coinSymbol}>
-            {`${rank ? `${rank} .` : ''}${symbol}`}
+            {`${rank ? `${rank}. ` : ''}${symbol}`}
           </AppText>
         </View>
       </View>
@@ -90,7 +89,7 @@ const CoinStatsCard = ({
         <Pressable onPress={onFavorite} hitSlop={16}>
           <Ionicons
             name={favoriteIconName}
-            size={iconSize.small}
+            size={16}
             color={isFavorite ? colors.warning : colors.textPrimary}
           />
         </Pressable>
@@ -124,5 +123,3 @@ CoinStatsCard.defaultProps = {
 };
 
 export default CoinStatsCard;
-
-export const coinStatsCardHeight = 56;

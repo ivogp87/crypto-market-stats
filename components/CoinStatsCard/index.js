@@ -1,1 +1,2 @@
-export { default, coinStatsCardHeight } from './CoinStatsCard';
+export { default } from './CoinStatsCard';
+export { coinStatsCardHeight } from './styles';
