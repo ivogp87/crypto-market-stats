@@ -6,10 +6,10 @@ import getCurrencySymbol from './getCurrencySymbol';
 // formatCurrency(100200.300) => '$100,200.30'
 // Number.toLocaleString() and Intl.NumberFormat() are non supported by React Native
 const formatCurrency = (amount, currencyCode) => {
-  if (amount === null) return 'n/a';
+  if (!amount && amount !== 0) return 'n/a';
 
-  const { currency } = Localization || 'USD';
-  const currencySymbol = getCurrencySymbol(currencyCode);
+  const { currency = 'USD' } = Localization;
+  const currencySymbol = getCurrencySymbol(currencyCode || currency);
   const { symbolOnLeft, spaceBetweenAmountAndSymbol } = currencyFormatter.findCurrency(currency);
 
   if (amount < 1) {

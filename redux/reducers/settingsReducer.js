@@ -1,4 +1,9 @@
-import { SET_SORTING_OPTION, TOGGLE_FAVORITE_COIN } from '../actionTypes';
+import {
+  SET_SORTING_OPTION,
+  TOGGLE_FAVORITE_COIN,
+  SET_COIN_CHART_INTERVAL,
+  SET_COIN_CHART_TYPE,
+} from '../actionTypes';
 import { themeNames } from '../../styles/themes';
 
 const initialState = {
@@ -14,6 +19,10 @@ const initialState = {
   referenceCurrency: 'usd',
   showSparkline: true,
   favoriteCoinIds: [],
+  coinChartSettings: {
+    timeInterval: 1, // time interval for the chart data: one of [1, 7, 14, 30, 90, 180, 365, 'max']
+    chartType: 'price', // price | market cap | volume
+  },
 };
 
 const settingsReducer = (state = initialState, action) => {
@@ -29,6 +38,14 @@ const settingsReducer = (state = initialState, action) => {
         : [...favoriteCoinIds, coinId];
 
       return { ...state, favoriteCoinIds: favoriteCoins };
+    }
+    case SET_COIN_CHART_INTERVAL: {
+      const newCoinChartSettings = { ...state.coinChartSettings, timeInterval: action.payload };
+      return { ...state, coinChartSettings: newCoinChartSettings };
+    }
+    case SET_COIN_CHART_TYPE: {
+      const newCoinChartSettings = { ...state.coinChartSettings, chartType: action.payload };
+      return { ...state, coinChartSettings: newCoinChartSettings };
     }
     default:
       return state;

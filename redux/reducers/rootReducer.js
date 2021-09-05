@@ -7,6 +7,8 @@ import coinsReducer from './coinsReducer';
 import favoriteCoinsReducer from './favoriteCoinsReducer';
 import exchangesReducer from './exchangesReducer';
 import btcExchangeRatesReducer from './btcExchangeRatesReducer';
+import coinChartReducer from './coinChartReducer';
+import coinDetailsReducer from './coinDetailsReducer';
 import settingsReducer from './settingsReducer';
 
 const rootPersistConfig = {
@@ -21,6 +23,8 @@ const rootReducer = combineReducers({
   favoriteCoins: favoriteCoinsReducer,
   exchanges: exchangesReducer,
   btcExchangeRates: btcExchangeRatesReducer,
+  coinChart: coinChartReducer,
+  coinDetails: coinDetailsReducer,
   settings: settingsReducer,
 });
 

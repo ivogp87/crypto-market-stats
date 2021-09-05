@@ -25,7 +25,7 @@ import AppText from '../../components/AppText';
 import CoinStatsCard, { coinStatsCardHeight } from '../../components/CoinStatsCard';
 import ListItemSeparator from '../../components/ListItemSeparator';
 
-const CoinsScreen = ({ route }) => {
+const CoinsScreen = ({ navigation, route }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const displayFavoriteCoins = route?.params?.displayFavoriteCoins; // boolean - display either all coins or favorite coins list
@@ -91,7 +91,13 @@ const CoinsScreen = ({ route }) => {
     displayFavoriteCoins,
   ]);
 
-  const handlePress = useCallback(() => {}, []);
+  const { navigate } = navigation;
+  const handleCoinPress = useCallback(
+    (id, name, symbol, iconUrl) => {
+      navigate('Coin', { screen: 'Coin Overview', params: { id, name, symbol, iconUrl } });
+    },
+    [navigate]
+  );
 
   const handleFavorite = useCallback(
     (coinId) => {
@@ -148,7 +154,7 @@ const CoinsScreen = ({ route }) => {
         <CoinStatsCard
           id={id}
           onPress={() => {
-            handlePress(id);
+            handleCoinPress(id, name, symbol, image);
           }}
           onFavorite={() => {
             handleFavorite(id);
@@ -169,7 +175,7 @@ const CoinsScreen = ({ route }) => {
     [
       referenceCurrency,
       handleFavorite,
-      handlePress,
+      handleCoinPress,
       showSparkline,
       priceChangeInterval,
       favoriteCoinIds,
@@ -258,14 +264,17 @@ const CoinsScreen = ({ route }) => {
     );
   }
 
-  if ((status === 'loading' && !coins) || (favoriteCoinsStatus === 'loading' && !favoriteCoins)) {
+  if (
+    (status === 'loading' && !coins) ||
+    (favoriteCoinsStatus === 'loading' && !favoriteCoins && displayFavoriteCoins)
+  ) {
     return <Spinner size="large" stretch />;
   }
 
   if (displayFavoriteCoins && favoriteCoinIds.length === 0) {
     return (
       <View style={styles.emptyFavoritesList}>
-        <AppText>You don't have any favorite cryptoccurencies yet.</AppText>
+        <AppText>You don&apos;t have any favorite cryptoccurencies yet.</AppText>
       </View>
     );
   }

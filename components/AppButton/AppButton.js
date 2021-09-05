@@ -13,11 +13,12 @@ const AppButton = ({
   iconRight,
   size,
   color,
+  variant,
   rounded,
   stretch,
   style,
 }) => {
-  const styles = useStyles(themedStyles, size, color, rounded, stretch);
+  const styles = useStyles(themedStyles, size, color, rounded, stretch, variant);
 
   return (
     <Pressable
@@ -39,6 +40,7 @@ AppButton.propTypes = {
   iconRight: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium']),
   color: PropTypes.oneOf(['primary', 'secondary', 'info', 'success', 'warning', 'danger']),
+  variant: PropTypes.oneOf(['solid', 'outline']),
   rounded: PropTypes.bool,
   stretch: PropTypes.bool,
   style: stylePropTypes,
@@ -49,6 +51,7 @@ AppButton.defaultProps = {
   iconRight: null,
   size: 'medium',
   color: 'primary',
+  variant: 'solid',
   rounded: false,
   stretch: false,
   style: null,

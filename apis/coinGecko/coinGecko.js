@@ -30,3 +30,21 @@ export const fetchExchanges = (page = 1, resultsPerPage = 100) =>
   coinGecko.get(`/exchanges?page=${page}&per_page=${resultsPerPage}`);
 
 export const fetchBtcExchangeRates = () => coinGecko.get('/exchange_rates');
+
+export const fetchCoinChart = (coinId, referenceCurrency, timeInterval) =>
+  coinGecko.get(
+    `/coins/${coinId}/market_chart?vs_currency=${referenceCurrency}&days=${timeInterval}`
+  );
+
+export const fetchCoinDetails = (
+  coinId,
+  marketData = true,
+  localization = false,
+  tickers = false,
+  communityData = false,
+  developerData = false,
+  sparkline = false
+) =>
+  coinGecko.get(
+    `coins/${coinId}?localization=${localization}&tickers=${tickers}&market_data=${marketData}&community_data=${communityData}&developer_data=${developerData}&sparkline=${sparkline}`
+  );
