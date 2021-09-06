@@ -11,3 +11,4 @@ export { default as setSortingOption } from './setSortingOption';
 export { default as toggleFavoriteCoin } from './toggleFavoriteCoin';
 export { default as setCoinChartInterval } from './setCoinChartInterval';
 export { default as setCoinChartType } from './setCoinChartType';
+export { default as getCoinMarkets } from './getCoinMarkets';

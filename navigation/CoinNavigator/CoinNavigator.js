@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleFavoriteCoin } from '../../redux/actions';
 
 import CoinOverviewScreen from '../../screens/CoinOverviewScreen';
+import CoinMarketsScreen from '../../screens/CoinMarketsScreen';
 import CoinHeaderTitle from '../../components/CoinHeaderTitle';
 import CoinHeaderRight from '../../components/CoinHeaderRight';
 
@@ -34,6 +35,12 @@ const CoinNavigator = ({ navigation, route }) => {
         name="Coin Overview"
         component={CoinOverviewScreen}
         options={{ title: 'Overview' }}
+      />
+      <Tab.Screen
+        name="Coin Markets"
+        component={CoinMarketsScreen}
+        options={{ title: 'Markets' }}
+        initialParams={{ coinId: id }}
       />
     </Tab.Navigator>
   );

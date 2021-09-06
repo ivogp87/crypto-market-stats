@@ -10,6 +10,7 @@ import btcExchangeRatesReducer from './btcExchangeRatesReducer';
 import coinChartReducer from './coinChartReducer';
 import coinDetailsReducer from './coinDetailsReducer';
 import settingsReducer from './settingsReducer';
+import coinMarketsReducer from './coinMarketsReducer';
 
 const rootPersistConfig = {
   key: 'root',
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   coinChart: coinChartReducer,
   coinDetails: coinDetailsReducer,
   settings: settingsReducer,
+  coinMarkets: coinMarketsReducer,
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);

@@ -48,3 +48,13 @@ export const fetchCoinDetails = (
   coinGecko.get(
     `coins/${coinId}?localization=${localization}&tickers=${tickers}&market_data=${marketData}&community_data=${communityData}&developer_data=${developerData}&sparkline=${sparkline}`
   );
+
+export const fetchCoinMarkets = (
+  coinId,
+  page = 1,
+  order = 'trust_score_desc',
+  includeExchangeLogo = true
+) =>
+  coinGecko.get(
+    `/coins/${coinId}/tickers?include_exchange_logo=${includeExchangeLogo}&page=${page}&${order}=trust_score_desc`
+  );
