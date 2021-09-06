@@ -9,6 +9,8 @@ Mobile app which shows statistics about the cryptocurrency market.
 - Add cryptocurrencies to favorites
 - View statistics for crypto exchanges
 - Light and dark mode
+- View price, market cap and volume charts and other statistics for a cryptocurrency
+- View market pair statistics for a cryptocurrency
 - More features coming soon...
 
 ### Tech Stack
