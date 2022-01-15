@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getBtcExchangeRates, getCoinMarkets } from '../../redux/actions';
+import { getBtcExchangeRates, getCoinMarkets, getCoinMarketsNextPage } from '../../redux/actions';
 import { shouldUpdate } from '../../utils';
 import { sharedStyles } from '../../styles';
 
@@ -13,6 +13,8 @@ import MarketPairCard, { marketPairCardHeight } from '../../components/MarketPai
 import ListItemSeparator from '../../components/ListItemSeparator';
 
 const CoinMarketsScreen = ({ route }) => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
   const {
     btcExchangeRates,
@@ -25,10 +27,14 @@ const CoinMarketsScreen = ({ route }) => {
   const coinMarketData = coinMarkets[coinId];
   const dispatch = useDispatch();
 
-  const getData = useCallback(() => {
-    dispatch(getBtcExchangeRates());
+  const getCoinMarketsData = useCallback(() => {
     dispatch(getCoinMarkets(coinId));
   }, [dispatch, coinId]);
+
+  const getData = useCallback(() => {
+    dispatch(getBtcExchangeRates());
+    getCoinMarketsData();
+  }, [dispatch, getCoinMarketsData]);
 
   const btcExchangeRate = btcExchangeRates?.[referenceCurrency]?.value;
   useEffect(() => {
@@ -45,8 +51,34 @@ const CoinMarketsScreen = ({ route }) => {
     }
   }, [dispatch, coinId, coinMarketData, btcExchangeRate, lastExchangeRateUpdate]);
 
+  const setScrollingStarted = () => {
+    if (!hasScrolled) {
+      setHasScrolled(true);
+    }
+  };
+
+  useEffect(() => () => setHasScrolled(false), []);
+
+  const loadMarketsNextPage = useCallback(() => {
+    if (!coinMarketsStatus.includes('loading')) {
+      const pageToRequest = Math.ceil(coinMarketData?.tickers?.length / 100 + 1);
+      if (pageToRequest && hasScrolled) {
+        dispatch(getCoinMarketsNextPage(coinId, pageToRequest));
+      }
+    }
+  }, [coinMarketData?.tickers?.length, hasScrolled, coinMarketsStatus, coinId, dispatch]);
+
+  const handleRefresh = useCallback(() => {
+    setIsRefreshing(true);
+    getCoinMarketsData();
+  }, [getCoinMarketsData]);
+
+  useEffect(() => {
+    if (isRefreshing && coinMarketsStatus !== 'loading') setIsRefreshing(false);
+  }, [isRefreshing, coinMarketsStatus]);
+
   const keyExtractor = useCallback(
-    ({ base, target, market }, index) => base + target + market.identifier + index,
+    ({ base, target, volume }, index) => base + target + volume + index,
     []
   );
 
@@ -89,7 +121,10 @@ const CoinMarketsScreen = ({ route }) => {
     []
   );
 
-  if (coinMarketsStatus === 'loading' || exchangeRatesStatus === 'loading') {
+  if (
+    (coinMarketsStatus === 'loading' && !coinMarketData?.tickers?.length) ||
+    exchangeRatesStatus === 'loading'
+  ) {
     return <Spinner size="large" stretch />;
   }
 
@@ -116,7 +151,21 @@ const CoinMarketsScreen = ({ route }) => {
         windowSize={7}
         maxToRenderPerBatch={10}
         updateCellsBatchingPeriod={100}
+        refreshing={isRefreshing}
+        onRefresh={handleRefresh}
+        onEndReachedThreshold={0.7}
+        onEndReached={loadMarketsNextPage}
+        onMomentumScrollBegin={setScrollingStarted}
+        ListFooterComponent={() => (coinMarketsStatus === 'loading next page' ? <Spinner /> : null)}
       />
+      {coinMarketsStatus === 'error loading next page' && (
+        <AppButton
+          title="Load More"
+          style={sharedStyles.loadMoreButton}
+          onPress={loadMarketsNextPage}
+          stretch
+        />
+      )}
     </View>
   );
 };
