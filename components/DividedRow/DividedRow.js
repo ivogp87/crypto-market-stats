@@ -7,8 +7,10 @@ import AppText from '../AppText';
 
 const DividedRow = ({ textLeft, textRight, children }) => (
   <View style={styles.dividedRow}>
-    <AppText size="large">{textLeft}</AppText>
-    <AppText size="large">{textRight}</AppText>
+    <AppText size="large" style={styles.textLeft}>
+      {textLeft}
+    </AppText>
+    {textRight && <AppText size="large">{textRight}</AppText>}
     {!!children && !textRight && children}
   </View>
 );

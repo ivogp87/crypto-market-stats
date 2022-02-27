@@ -42,7 +42,9 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "victory-native": "^35.3.2"
+    "victory-native": "^35.3.2",
+    "expo-linking": "~2.2.3",
+    "expo-web-browser": "~9.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

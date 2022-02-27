@@ -5,3 +5,4 @@ export { default as formatAndAbbreviateCurrency } from './formatAndAbbreviateCur
 export { default as getCurrencySymbol } from './getCurrencySymbol';
 export { default as stylePropTypes } from './stylePropTypes';
 export { default as shouldUpdate } from './shouldUpdate';
+export { default as formatLinkAnchor } from './formatLinkAnchor';
