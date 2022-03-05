@@ -77,7 +77,7 @@ const CoinsScreen = ({ navigation, route }) => {
 
   const loadCoinsNextPage = useCallback(() => {
     if (!status.includes('loading') && !displayFavoriteCoins) {
-      const page = coins.length / 100 + 1;
+      const page = Math.ceil(coins.length / 100 + 1);
       dispatch(getCoinsNextPage(referenceCurrency, orderBy, page, showSparkline, category));
     }
   }, [
