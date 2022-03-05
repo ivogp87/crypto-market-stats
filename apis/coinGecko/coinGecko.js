@@ -36,6 +36,9 @@ export const fetchCoinChart = (coinId, referenceCurrency, timeInterval) =>
     `/coins/${coinId}/market_chart?vs_currency=${referenceCurrency}&days=${timeInterval}`
   );
 
+export const fetchCandlestickChart = (coinId, referenceCurrency, timeInterval) =>
+  coinGecko.get(`/coins/${coinId}/ohlc?vs_currency=${referenceCurrency}&days=${timeInterval}`);
+
 export const fetchCoinDetails = (
   coinId,
   marketData = true,

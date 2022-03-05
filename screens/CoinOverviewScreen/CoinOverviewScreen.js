@@ -6,12 +6,15 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import styles from './styles';
 import { actionSheetThemedStyles } from '../../styles';
 import { useTheme, useStyles } from '../../hooks';
+import { getLineChartData, getCandlestickChartData, shouldUpdate } from '../../utils';
 
 import {
   getCoinChart,
+  getCandlestickChart,
   getCoinDetails,
   setCoinChartInterval,
   setCoinChartType,
+  setChartVariant,
 } from '../../redux/actions';
 
 import Spinner from '../../components/Spinner';
@@ -22,18 +25,30 @@ import Chart from '../../components/Chart';
 import ButtonGroup from '../../components/ButtonGroup';
 import CoinInfo from '../../components/CoinInfo';
 import CoinPriceChange from '../../components/CoinPriceChange';
+import CandlestickChart from '../../components/CandlestickChart';
 
 const CoinOverviewScreen = ({ route }) => {
   const coinId = route?.params?.id;
   const coinDetails = useSelector((state) => state.coinDetails.coinDetails[coinId]);
   const coinDetailsStatus = useSelector((state) => state.coinDetails.status);
-  const { coinChart, status: coinChartStatus } = useSelector((state) => state.coinChart);
+  const { lineChart, candlestickChart, status: coinChartStatus } = useSelector(
+    (state) => state.coinChart
+  );
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
-  const { timeInterval, chartType } = useSelector((state) => state.settings.coinChartSettings);
+  const { timeInterval, chartType, chartVariant } = useSelector(
+    (state) => state.settings.coinChartSettings
+  );
   const dispatch = useDispatch();
 
-  const shouldRefreshData =
-    new Date(coinDetails?.lastUpdated).getTime() + 1000 * 60 * 5 < Date.now();
+  const handleChartVariantChange = () => {
+    if (chartVariant === 'line chart') {
+      dispatch(setChartVariant('candlestick chart'));
+    } else {
+      dispatch(setChartVariant('line chart'));
+    }
+  };
+
+  const shouldRefreshData = shouldUpdate(coinDetails?.lastUpdated, 1000 * 60 * 5);
 
   useEffect(() => {
     if (!coinDetails || shouldRefreshData) {
@@ -42,8 +57,12 @@ const CoinOverviewScreen = ({ route }) => {
   }, [dispatch, coinId, coinDetails, shouldRefreshData]);
 
   useEffect(() => {
-    dispatch(getCoinChart(coinId, referenceCurrency, timeInterval));
-  }, [dispatch, coinId, referenceCurrency, timeInterval]);
+    if (chartVariant === 'line chart') {
+      dispatch(getCoinChart(coinId, referenceCurrency, timeInterval));
+    } else {
+      dispatch(getCandlestickChart(coinId, referenceCurrency, timeInterval));
+    }
+  }, [dispatch, coinId, referenceCurrency, timeInterval, chartVariant]);
 
   const handleTimeIntervalChange = (interval) => {
     dispatch(setCoinChartInterval(interval));
@@ -94,17 +113,10 @@ const CoinOverviewScreen = ({ route }) => {
     );
   }
 
-  let chartData;
-  switch (chartType) {
-    case 'market cap':
-      chartData = coinChart?.market_caps?.map((item) => ({ x: item[0], y: item[1] }));
-      break;
-    case 'volume':
-      chartData = coinChart?.total_volumes?.map((item) => ({ x: item[0], y: item[1] }));
-      break;
-    default:
-      chartData = coinChart?.prices?.map((item) => ({ x: item[0], y: item[1] }));
-  }
+  const lineChartData = getLineChartData(lineChart, chartType);
+  const candlestickChartData = getCandlestickChartData(candlestickChart);
+  const coinChartLoading = coinChartStatus === 'loading';
+  const coinChartError = coinChartStatus === 'error';
 
   const {
     current_price,
@@ -152,6 +164,8 @@ const CoinOverviewScreen = ({ route }) => {
     />
   ));
 
+  const buttonIcon = Platform.OS === 'android' ? 'md-swap-vertical' : 'ios-swap-vertical';
+
   return (
     <ScrollView
       style={styles.container}
@@ -162,23 +176,34 @@ const CoinOverviewScreen = ({ route }) => {
         priceChangePercentage={coinDetails.market_data.price_change_percentage_24h}
         referenceCurrency={referenceCurrency}
       />
-      {coinChart && (
-        <Chart
-          data={chartData}
-          timeInterval={timeInterval}
-          onTimeIntervalChange={handleTimeIntervalChange}
-          isLoading={coinChartStatus === 'loading'}
-          error={coinChartStatus === 'error'}
+      {(lineChartData || coinChartLoading) && chartVariant === 'line chart' && (
+        <Chart data={lineChartData} isLoading={coinChartLoading} error={coinChartError} />
+      )}
+      {(candlestickChartData || coinChartLoading) && chartVariant === 'candlestick chart' && (
+        <CandlestickChart
+          data={candlestickChartData}
+          isLoading={coinChartLoading}
+          error={coinChartError}
         />
       )}
       <ButtonGroup>
         {chartButtons}
         <ButtonGroup.Item
+          title="Chart Variant"
+          onPress={handleChartVariantChange}
+          size="small"
+          color="info"
+          iconLeft={buttonIcon}
+          rounded
+          variant="outline"
+          textTransform="capitalize"
+        />
+        <ButtonGroup.Item
           title={chartType}
           onPress={handleChartTypeChange}
           size="small"
           color="info"
-          iconLeft={Platform.OS === 'android' ? 'md-swap-vertical' : 'ios-swap-vertical'}
+          iconLeft={buttonIcon}
           rounded
           variant="outline"
           textTransform="capitalize"

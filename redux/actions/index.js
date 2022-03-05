@@ -13,3 +13,5 @@ export { default as setCoinChartInterval } from './setCoinChartInterval';
 export { default as setCoinChartType } from './setCoinChartType';
 export { default as getCoinMarkets } from './getCoinMarkets';
 export { default as getCoinMarketsNextPage } from './getCoinMarketsNextPage';
+export { default as getCandlestickChart } from './getCandlestickChart';
+export { default as setChartVariant } from './setChartVariant';

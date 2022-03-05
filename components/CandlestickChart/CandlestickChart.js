@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, useWindowDimensions } from 'react-native';
-import { VictoryChart, VictoryArea, VictoryAxis } from 'victory-native';
+import { VictoryChart, VictoryCandlestick, VictoryAxis } from 'victory-native';
+
+import { useColors, useStyles } from '../../hooks';
 
 import themedStyles from './styles';
-import { useColors, useStyles } from '../../hooks';
-import { abbreviateNumber } from '../../utils';
 
 import Spinner from '../Spinner';
 import ErrorMessage from '../ErrorMessage';
 
-const Chart = ({ data, isLoading, error }) => {
+const CandlestickChart = ({ data, isLoading, error }) => {
   const { width, height } = useWindowDimensions();
   const chartWidth = width;
   const chartHeight = height * 0.3;
@@ -35,14 +35,11 @@ const Chart = ({ data, isLoading, error }) => {
 
   if (!data || !Array.isArray(data) || !data?.length) return null;
 
-  const prices = data.map((item) => item.y);
-  const lowestPrice = Math.min(...prices);
-  const highestPrice = Math.max(...prices);
+  const lowestPrices = data.map(({ high }) => high);
+  const lowestPrice = Math.min(...lowestPrices);
 
-  const formatTick = (tick) => {
-    const ticks = data.map((item) => item.y);
-    return ticks.some((t) => t >= 100000) ? abbreviateNumber(tick) : tick;
-  };
+  const highestPrices = data.map(({ low }) => low);
+  const highestPrice = Math.max(...highestPrices);
 
   return (
     <View style={styles.chartSize}>
@@ -53,13 +50,6 @@ const Chart = ({ data, isLoading, error }) => {
         maxDomain={{ y: highestPrice }}
         padding={{ top: 8, right: 8, bottom: 16, left: 60 }}
       >
-        <VictoryArea
-          interpolation="natural"
-          data={data}
-          style={{
-            data: { stroke: colors.textPrimary, fill: 'transparent' },
-          }}
-        />
         <VictoryAxis
           fixLabelOverlap
           style={{
@@ -69,29 +59,37 @@ const Chart = ({ data, isLoading, error }) => {
         />
         <VictoryAxis
           dependentAxis
-          tickFormat={formatTick}
           style={{
             axis: { stroke: 'transparent' },
             grid: { stroke: colors.borderSecondary },
             tickLabels: { fill: colors.textPrimary },
           }}
         />
+        <VictoryCandlestick
+          candleColors={{ positive: colors.success, negative: colors.danger }}
+          data={data}
+        />
       </VictoryChart>
     </View>
   );
 };
 
-Chart.propTypes = {
+CandlestickChart.propTypes = {
   data: PropTypes.arrayOf(
-    PropTypes.shape({ x: PropTypes.number.isRequired, y: PropTypes.number.isRequired })
+    PropTypes.shape({
+      x: PropTypes.number,
+      open: PropTypes.number,
+      close: PropTypes.number,
+      high: PropTypes.number,
+      low: PropTypes.number,
+    })
   ),
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.bool,
 };
 
-Chart.defaultProps = {
+CandlestickChart.defaultProps = {
   data: null,
-  error: null,
+  error: false,
 };
-
-export default Chart;
+export default CandlestickChart;
