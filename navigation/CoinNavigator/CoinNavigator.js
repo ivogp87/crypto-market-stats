@@ -8,7 +8,7 @@ import CoinOverviewScreen from '../../screens/CoinOverviewScreen';
 import CoinMarketsScreen from '../../screens/CoinMarketsScreen';
 import AboutCoinScreen from '../../screens/AboutCoinScreen';
 
-import CoinHeaderTitle from '../../components/CoinHeaderTitle';
+import HeaderLogoTitle from '../../components/HeaderLogoTitle';
 import CoinHeaderRight from '../../components/CoinHeaderRight';
 
 const Tab = createMaterialTopTabNavigator();
@@ -21,7 +21,7 @@ const CoinNavigator = ({ navigation, route }) => {
   const dispatch = useDispatch();
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: () => <CoinHeaderTitle name={name} id={id} symbol={symbol} iconUrl={iconUrl} />,
+      headerTitle: () => <HeaderLogoTitle name={name} id={id} symbol={symbol} iconUrl={iconUrl} />,
       headerRight: () => (
         <CoinHeaderRight
           onFavorite={() => dispatch(toggleFavoriteCoin(id))}

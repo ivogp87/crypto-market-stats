@@ -8,3 +8,4 @@ export { default as shouldUpdate } from './shouldUpdate';
 export { default as formatLinkAnchor } from './formatLinkAnchor';
 export { default as getLineChartData } from './getLineChartData';
 export { default as getCandlestickChartData } from './getCandlestickChartData';
+export { default as convertBtcToCurrency } from './convertBtcToCurrency';

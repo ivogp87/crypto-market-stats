@@ -15,3 +15,5 @@ export { default as getCoinMarkets } from './getCoinMarkets';
 export { default as getCoinMarketsNextPage } from './getCoinMarketsNextPage';
 export { default as getCandlestickChart } from './getCandlestickChart';
 export { default as setChartVariant } from './setChartVariant';
+export { default as getExchangeVolumeChart } from './getExchangeVolumeChart';
+export { default as getExchangeDetails } from './getExchangeDetails';

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './styles';
 import { getExchanges, getExchangesNextPage, getBtcExchangeRates } from '../../redux/actions';
+import { convertBtcToCurrency, shouldUpdate } from '../../utils';
 
 import ErrorMessage from '../../components/ErrorMessage';
 import AppButton from '../../components/AppButton';
@@ -11,7 +12,7 @@ import Spinner from '../../components/Spinner';
 import ExchangeStatsCard, { exchangeStatsCardHeight } from '../../components/ExchangeStatsCard';
 import ListItemSeparator from '../../components/ListItemSeparator';
 
-const ExchangesScreen = () => {
+const ExchangesScreen = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { exchanges, status } = useSelector((state) => state.exchanges);
   const { btcExchangeRates, status: exchangeRatesStatus } = useSelector(
@@ -22,10 +23,12 @@ const ExchangesScreen = () => {
 
   const loadExchanges = useCallback(() => {
     dispatch(getExchanges());
-    // The API returns exchanges trading volume in BTC. Fetch the BTC exchange rates in order to
-    // convert the trading volume to the referenceCurrency set by the user (state.settings.referenceCurrency)
-    dispatch(getBtcExchangeRates());
-  }, [dispatch]);
+
+    const shouldUpdateExchangeRates = shouldUpdate(btcExchangeRates?.lastUpdated, 1000 * 60 * 5);
+    if (!btcExchangeRates || shouldUpdateExchangeRates) {
+      dispatch(getBtcExchangeRates());
+    }
+  }, [dispatch, btcExchangeRates]);
 
   useEffect(() => {
     loadExchanges();
@@ -49,18 +52,22 @@ const ExchangesScreen = () => {
     }
   }, [status, exchangeRatesStatus]);
 
-  // eslint-disable-next-line no-unused-vars
-  const handleExchangePress = (exchangeId) => {};
+  const { navigate } = navigation;
+  const handleExchangePress = useCallback(
+    (id, name, iconUrl) => {
+      navigate('Exchange', { screen: 'Exchange Overview', params: { id, name, iconUrl } });
+    },
+    [navigate]
+  );
 
   const renderItem = useCallback(
     ({ item }) => {
       const { id, name, trust_score_rank, image, trade_volume_24h_btc } = item;
 
-      // convert trade_volume_24h_btc to the referenceCurrency set by the user (state.settings.referenceCurrency)
-      const btcExchangeRate = btcExchangeRates?.[referenceCurrency]?.value;
-      const tradeVolume = btcExchangeRate
-        ? trade_volume_24h_btc * btcExchangeRate
-        : trade_volume_24h_btc;
+      const tradeVolume = convertBtcToCurrency(
+        trade_volume_24h_btc,
+        btcExchangeRates?.[referenceCurrency]?.value
+      );
 
       return (
         <ExchangeStatsCard
@@ -68,13 +75,13 @@ const ExchangesScreen = () => {
           name={name}
           rank={trust_score_rank}
           iconUrl={image}
-          tradeVolume={tradeVolume}
-          referenceCurrency={btcExchangeRate ? referenceCurrency : 'btc'}
-          onPress={() => handleExchangePress(id)}
+          tradeVolume={tradeVolume ?? trade_volume_24h_btc}
+          referenceCurrency={tradeVolume || tradeVolume === 0 ? referenceCurrency : 'btc'}
+          onPress={() => handleExchangePress(id, name, image)}
         />
       );
     },
-    [btcExchangeRates, referenceCurrency]
+    [btcExchangeRates, referenceCurrency, handleExchangePress]
   );
 
   const keyExtractor = useCallback((item, index) => item.id + index, []);
@@ -98,6 +105,8 @@ const ExchangesScreen = () => {
 
   if (status === 'loading' && exchangeRatesStatus === 'loading' && !exchanges)
     return <Spinner size="large" stretch />;
+
+  if (!exchanges) return null;
 
   return (
     <View style={styles.container}>
