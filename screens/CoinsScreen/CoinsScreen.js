@@ -15,7 +15,7 @@ import styles from './styles';
 import { orderByOptions, priceChangeIntervalOptions, categoryOptions } from './sortingOptions';
 
 import { useTheme, useStyles } from '../../hooks';
-import { actionSheetThemedStyles } from '../../styles';
+import { actionSheetThemedStyles, sharedStyles } from '../../styles';
 
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
@@ -280,7 +280,7 @@ const CoinsScreen = ({ navigation, route }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={sharedStyles.screenContainer}>
       <ButtonGroup style={styles.buttonGroup}>
         <ButtonGroup.Item
           onPress={handleOrderByPress}

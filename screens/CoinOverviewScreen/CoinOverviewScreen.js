@@ -3,8 +3,7 @@ import { ScrollView, useWindowDimensions, Platform, RefreshControl } from 'react
 import { useSelector, useDispatch } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 
-import styles from './styles';
-import { actionSheetThemedStyles } from '../../styles';
+import { actionSheetThemedStyles, sharedStyles } from '../../styles';
 import { useTheme, useStyles } from '../../hooks';
 import { getLineChartData, getCandlestickChartData, shouldUpdate } from '../../utils';
 
@@ -168,7 +167,7 @@ const CoinOverviewScreen = ({ route }) => {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={sharedStyles.screenContainer}
       refreshControl={<RefreshControl refreshing={false} onRefresh={getCoinData} />}
     >
       <CoinPrice

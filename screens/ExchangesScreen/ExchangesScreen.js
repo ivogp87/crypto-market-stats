@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { View, FlatList } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
-import styles from './styles';
 import { getExchanges, getExchangesNextPage, getBtcExchangeRates } from '../../redux/actions';
 import { convertBtcToCurrency, shouldUpdate } from '../../utils';
+import { sharedStyles } from '../../styles';
 
 import ErrorMessage from '../../components/ErrorMessage';
 import AppButton from '../../components/AppButton';
@@ -109,7 +109,7 @@ const ExchangesScreen = ({ navigation }) => {
   if (!exchanges) return null;
 
   return (
-    <View style={styles.container}>
+    <View style={sharedStyles.screenContainer}>
       <FlatList
         data={exchanges}
         keyExtractor={keyExtractor}
@@ -127,7 +127,7 @@ const ExchangesScreen = ({ navigation }) => {
         <AppButton
           title="Load More"
           onPress={loadExchangesNextPage}
-          style={styles.loadMoreButton}
+          style={sharedStyles.loadMoreButton}
           stretch
         />
       )}
