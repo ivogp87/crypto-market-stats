@@ -17,3 +17,4 @@ export { default as getCandlestickChart } from './getCandlestickChart';
 export { default as setChartVariant } from './setChartVariant';
 export { default as getExchangeVolumeChart } from './getExchangeVolumeChart';
 export { default as getExchangeDetails } from './getExchangeDetails';
+export { default as getExchangeMarkets } from './getExchangeMarkets';

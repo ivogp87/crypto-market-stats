@@ -66,3 +66,6 @@ export const fetchExchangeChart = (exchangeId, timeInterval) =>
   coinGecko.get(`/exchanges/${exchangeId}/volume_chart?days=${timeInterval}`);
 
 export const fetchExchangeDetails = (exchangeId) => coinGecko.get(`/exchanges/${exchangeId}`);
+
+export const fetchExchangeMarkets = (exchangeId, page) =>
+  coinGecko.get(`exchanges/${exchangeId}/tickers?page=${page}`);
