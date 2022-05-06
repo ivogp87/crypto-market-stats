@@ -6,7 +6,6 @@ export { default as getExchangesNextPage } from './getExchangesNextPage';
 export { default as getBtcExchangeRates } from './getBtcExchangeRates';
 export { default as getCoinChart } from './getCoinChart';
 export { default as getCoinDetails } from './getCoinDetails';
-
 export { default as setSortingOption } from './setSortingOption';
 export { default as toggleFavoriteCoin } from './toggleFavoriteCoin';
 export { default as setCoinChartInterval } from './setCoinChartInterval';
@@ -18,3 +17,7 @@ export { default as setChartVariant } from './setChartVariant';
 export { default as getExchangeVolumeChart } from './getExchangeVolumeChart';
 export { default as getExchangeDetails } from './getExchangeDetails';
 export { default as getExchangeMarkets } from './getExchangeMarkets';
+export { default as getTrendingSearches } from './getTrendingSearches';
+export { default as setSearchQuery } from './setSearchQuery';
+export { default as getSearchResults } from './getSearchResults';
+export { default as clearSearchResults } from './clearSearchResults';

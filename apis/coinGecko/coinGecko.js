@@ -69,3 +69,7 @@ export const fetchExchangeDetails = (exchangeId) => coinGecko.get(`/exchanges/${
 
 export const fetchExchangeMarkets = (exchangeId, page) =>
   coinGecko.get(`exchanges/${exchangeId}/tickers?page=${page}`);
+
+export const fetchTrendingSearches = () => coinGecko.get('search/trending');
+
+export const fetchSearchResults = (searchQuery) => coinGecko.get(`search?query=${searchQuery}`);

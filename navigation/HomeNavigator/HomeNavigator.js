@@ -28,9 +28,13 @@ const HomeNavigator = ({ navigation, route }) => {
   useEffect(() => {
     const headerTitle = getHeaderTitle(route);
 
+    const openSearchScreen = () => {
+      navigation.navigate('Search');
+    };
+
     navigation.setOptions({
       headerTitle,
-      headerRight: () => <CoinsListHeaderRight onSearch={() => {}} />,
+      headerRight: () => <CoinsListHeaderRight onSearch={openSearchScreen} />,
     });
   }, [navigation, route]);
 
