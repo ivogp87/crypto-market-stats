@@ -14,6 +14,7 @@ import MarketPairCard, { marketPairCardHeight } from '../../components/MarketPai
 import ListItemSeparator from '../../components/ListItemSeparator';
 
 const ExchangeMarketsScreen = ({ route }) => {
+  const [hasScrolled, setHasScrolled] = useState(false);
   const exchangeId = route?.params.exchangeId;
 
   const exchangeMarkets = useSelector(
@@ -63,12 +64,20 @@ const ExchangeMarketsScreen = ({ route }) => {
     exchangeMarketsStatus,
   ]);
 
+  const setScrollingStarted = () => {
+    if (!hasScrolled) {
+      setHasScrolled(true);
+    }
+  };
+
+  useEffect(() => () => setHasScrolled(false), []);
+
   const getExchangeMarketPairs = useCallback(() => {
-    if (exchangeMarketsStatus !== 'loading') {
+    if (exchangeMarketsStatus !== 'loading' && hasScrolled) {
       const page = Math.ceil(exchangeMarkets?.length / 100 + 1);
       dispatch(getExchangeMarkets(exchangeId, page));
     }
-  }, [dispatch, exchangeId, exchangeMarketsStatus, exchangeMarkets?.length]);
+  }, [dispatch, exchangeId, exchangeMarketsStatus, exchangeMarkets?.length, hasScrolled]);
 
   useEffect(() => {
     getExchangeMarketsData();
@@ -161,6 +170,7 @@ const ExchangeMarketsScreen = ({ route }) => {
         onRefresh={handleRefresh}
         onEndReachedThreshold={0.7}
         onEndReached={getExchangeMarketPairs}
+        onMomentumScrollBegin={setScrollingStarted}
         ListFooterComponent={() =>
           exchangeMarketsStatus === 'loading' && exchangeMarkets?.length ? <Spinner /> : null
         }
