@@ -15,24 +15,34 @@ import ListItemSeparator from '../../components/ListItemSeparator';
 const ExchangesScreen = ({ navigation }) => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { exchanges, status } = useSelector((state) => state.exchanges);
-  const { btcExchangeRates, status: exchangeRatesStatus } = useSelector(
-    (state) => state.btcExchangeRates
-  );
+  const {
+    btcExchangeRates,
+    status: exchangeRatesStatus,
+    lastUpdated: exchangeRatesLastUpdated,
+  } = useSelector((state) => state.btcExchangeRates);
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
   const dispatch = useDispatch();
 
   const loadExchanges = useCallback(() => {
-    dispatch(getExchanges());
+    if (!status.includes('loading')) {
+      dispatch(getExchanges());
+    }
+  }, [dispatch, status]);
 
-    const shouldUpdateExchangeRates = shouldUpdate(btcExchangeRates?.lastUpdated, 1000 * 60 * 5);
-    if (!btcExchangeRates || shouldUpdateExchangeRates) {
+  const getExchangeRatesData = useCallback(() => {
+    const shouldUpdateExchangeRates = shouldUpdate(exchangeRatesLastUpdated, 1000 * 60 * 5);
+    if (shouldUpdateExchangeRates && exchangeRatesStatus !== 'loading') {
       dispatch(getBtcExchangeRates());
     }
-  }, [dispatch, btcExchangeRates]);
+  }, [dispatch, exchangeRatesLastUpdated, exchangeRatesStatus]);
 
   useEffect(() => {
-    loadExchanges();
-  }, [loadExchanges]);
+    if (!exchanges && status !== 'error') {
+      loadExchanges();
+    }
+
+    getExchangeRatesData();
+  }, [loadExchanges, getExchangeRatesData, exchanges, status, exchangeRatesStatus]);
 
   const loadExchangesNextPage = useCallback(() => {
     if (!status.includes('loading')) {
@@ -44,7 +54,8 @@ const ExchangesScreen = ({ navigation }) => {
   const handleRefresh = useCallback(() => {
     setIsRefreshing(true);
     loadExchanges();
-  }, [loadExchanges]);
+    getExchangeRatesData();
+  }, [loadExchanges, getExchangeRatesData]);
 
   useEffect(() => {
     if (status !== 'loading' && exchangeRatesStatus !== 'loading') {
@@ -96,9 +107,14 @@ const ExchangesScreen = ({ navigation }) => {
   );
 
   if (status === 'error') {
+    const getScreenData = () => {
+      loadExchanges();
+      getExchangeRatesData();
+    };
+
     return (
       <ErrorMessage message="An error has occurred." stretch>
-        <AppButton title="Retry" onPress={loadExchanges} stretch />
+        <AppButton title="Retry" onPress={getScreenData} stretch />
       </ErrorMessage>
     );
   }

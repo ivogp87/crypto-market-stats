@@ -22,9 +22,11 @@ const ExchangeOverviewScreen = ({ route }) => {
   const exchangeId = route?.params?.id;
   const exchangeDetails = useSelector((state) => state.exchangeDetails.exchangeDetails[exchangeId]);
   const exchangeDetailsStatus = useSelector((state) => state.exchangeDetails.status);
-  const { btcExchangeRates, status: exchangeRatesStatus } = useSelector(
-    (state) => state.btcExchangeRates
-  );
+  const {
+    btcExchangeRates,
+    status: exchangeRatesStatus,
+    lastUpdated: exchangeRatesLastUpdated,
+  } = useSelector((state) => state.btcExchangeRates);
   const { timeInterval } = useSelector((state) => state.settings.coinChartSettings);
   const { volumeChart, status: chartStatus } = useSelector((state) => state.exchangeChart);
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
@@ -32,15 +34,22 @@ const ExchangeOverviewScreen = ({ route }) => {
 
   const getExchangeData = useCallback(() => {
     const shouldUpdateExchangeDetails = shouldUpdate(exchangeDetails?.lastUpdated, 1000 * 60 * 5);
-    if ((exchangeId && !exchangeDetails) || (exchangeId && shouldUpdateExchangeDetails)) {
+    if (exchangeId && shouldUpdateExchangeDetails && exchangeDetailsStatus !== 'loading') {
       dispatch(getExchangeDetails(exchangeId));
     }
 
-    const shouldUpdateExchangeRates = shouldUpdate(btcExchangeRates?.lastUpdated, 1000 * 60 * 5);
-    if (!btcExchangeRates || shouldUpdateExchangeRates) {
+    const shouldUpdateExchangeRates = shouldUpdate(exchangeRatesLastUpdated, 1000 * 60 * 5);
+    if (shouldUpdateExchangeRates && exchangeRatesStatus !== 'loading') {
       dispatch(getBtcExchangeRates());
     }
-  }, [dispatch, exchangeId, exchangeDetails, btcExchangeRates]);
+  }, [
+    dispatch,
+    exchangeId,
+    exchangeDetails,
+    exchangeDetailsStatus,
+    exchangeRatesLastUpdated,
+    exchangeRatesStatus,
+  ]);
 
   useEffect(() => {
     getExchangeData();
@@ -64,6 +73,7 @@ const ExchangeOverviewScreen = ({ route }) => {
       getExchangeData();
       getVolumeChartData();
     };
+
     return (
       <ErrorMessage message="An error has occurred." stretch>
         <AppButton title="Retry" onPress={onRetry} stretch />
