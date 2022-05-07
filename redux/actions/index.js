@@ -21,3 +21,4 @@ export { default as getTrendingSearches } from './getTrendingSearches';
 export { default as setSearchQuery } from './setSearchQuery';
 export { default as getSearchResults } from './getSearchResults';
 export { default as clearSearchResults } from './clearSearchResults';
+export { default as setTheme } from './setTheme';

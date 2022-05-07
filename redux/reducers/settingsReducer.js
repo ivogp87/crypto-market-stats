@@ -4,6 +4,7 @@ import {
   SET_COIN_CHART_INTERVAL,
   SET_COIN_CHART_TYPE,
   SET_CHART_VARIANT,
+  SET_THEME,
 } from '../actionTypes';
 import { themeNames } from '../../styles/themes';
 
@@ -52,6 +53,9 @@ const settingsReducer = (state = initialState, action) => {
     case SET_CHART_VARIANT: {
       const newCoinChartSettings = { ...state.coinChartSettings, chartVariant: action.payload };
       return { ...state, coinChartSettings: newCoinChartSettings };
+    }
+    case SET_THEME: {
+      return { ...state, theme: action.payload };
     }
     default:
       return state;

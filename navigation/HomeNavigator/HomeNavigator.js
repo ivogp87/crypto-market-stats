@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import CoinsScreen from '../../screens/CoinsScreen';
 import ExchangesScreen from '../../screens/ExchangesScreen';
+import MoreScreen from '../../screens/MoreScreen';
 
 import CoinsListHeaderRight from '../../components/CoinsListHeaderRight/CoinsListHeaderRight';
 
@@ -17,6 +18,8 @@ const getHeaderTitle = (route) => {
       return 'Favorites';
     case 'Exchanges':
       return 'Exchanges';
+    case 'More':
+      return 'CryptoMarketStats';
     default:
       return 'Cryptocurrency Stats';
   }
@@ -34,7 +37,10 @@ const HomeNavigator = ({ navigation, route }) => {
 
     navigation.setOptions({
       headerTitle,
-      headerRight: () => <CoinsListHeaderRight onSearch={openSearchScreen} />,
+      headerRight: () =>
+        headerTitle !== 'CryptoMarketStats' ? (
+          <CoinsListHeaderRight onSearch={openSearchScreen} />
+        ) : null,
     });
   }, [navigation, route]);
 
@@ -78,6 +84,22 @@ const HomeNavigator = ({ navigation, route }) => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons
               name={Platform.OS === 'android' ? 'md-repeat' : 'ios-repeat'}
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="More"
+        component={MoreScreen}
+        options={{
+          tabBarLabel: 'More',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name={
+                Platform.OS === 'android' ? 'md-ellipsis-horizontal' : 'ios-ellipsis-horizontal'
+              }
               color={color}
               size={size}
             />
