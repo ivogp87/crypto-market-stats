@@ -2,11 +2,17 @@ import React, { useEffect, useCallback } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSearchQuery, getSearchResults, clearSearchResults } from '../../redux/actions';
+import {
+  setSearchQuery,
+  getSearchResults,
+  clearSearchResults,
+  setCurrencyToFind,
+} from '../../redux/actions';
 
 import HomeNavigator from '../HomeNavigator';
 import CoinNavigator from '../CoinNavigator';
 import ExchangeNavigator from '../ExchangeNavigator';
+import SelectCurrencyNavigator from '../SelectCurrencyNavigator';
 
 import SearchScreen from '../../screens/SearchScreen';
 import SearchBar from '../../components/SearchBar';
@@ -18,6 +24,8 @@ const RootNavigator = () => {
   const { searchQuery, coins, exchanges, status: searchResultsStatus } = useSelector(
     (state) => state.searchResults
   );
+
+  const currencyToFind = useSelector((state) => state.settings.currencyToFind);
 
   const dispatch = useDispatch();
 
@@ -47,6 +55,10 @@ const RootNavigator = () => {
     dispatch(setSearchQuery(text));
   };
 
+  const handleCurrencyToFindTextChange = (string) => {
+    dispatch(setCurrencyToFind(string));
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeNavigator} />
@@ -63,6 +75,22 @@ const RootNavigator = () => {
               onChangeText={handleTextChange}
               onSubmitEditing={handleSearch}
               onClear={() => handleTextChange('')}
+            />
+          ),
+          headerRight: () => <AppButton title="Cancel" size="small" onPress={navigation.goBack} />,
+        })}
+      />
+      <Stack.Screen
+        name="Select Currency"
+        component={SelectCurrencyNavigator}
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <SearchBar
+              text={currencyToFind}
+              placeholder="Find currency"
+              onChangeText={handleCurrencyToFindTextChange}
+              onSubmitEditing={() => handleCurrencyToFindTextChange(currencyToFind)}
+              onClear={() => handleCurrencyToFindTextChange('')}
             />
           ),
           headerRight: () => <AppButton title="Cancel" size="small" onPress={navigation.goBack} />,

@@ -15,6 +15,7 @@ import exchangeChartReducer from './exchangeChartReducer';
 import exchangeDetailsReducer from './exchangeDetailsReducer';
 import trendingSearchesReducer from './trendingSearchesReducer';
 import searchResultsReducer from './searchResultsReducer';
+import supportedCurrenciesReducer from './supportedCurrenciesReducer';
 
 const rootPersistConfig = {
   key: 'root',
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   exchangeDetails: exchangeDetailsReducer,
   trendingSearches: trendingSearchesReducer,
   searchResults: searchResultsReducer,
+  supportedCurrencies: supportedCurrenciesReducer,
 });
 
 export default persistReducer(rootPersistConfig, rootReducer);

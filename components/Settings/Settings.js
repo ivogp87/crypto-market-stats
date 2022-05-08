@@ -8,7 +8,7 @@ import { useStyles } from '../../hooks';
 import Heading from '../Heading';
 import DividedRow from '../DividedRow';
 
-const Settings = ({ themeName, onThemeChangePress }) => {
+const Settings = ({ themeName, currencyName, onThemeChangePress, onCurrencyChangePress }) => {
   const styles = useStyles(themedStyles);
 
   return (
@@ -18,6 +18,11 @@ const Settings = ({ themeName, onThemeChangePress }) => {
       </Heading>
       <View style={styles.settingsList}>
         <DividedRow textLeft="Theme" textRight={themeName} onPress={onThemeChangePress} />
+        <DividedRow
+          textLeft="Reference Currency"
+          textRight={currencyName}
+          onPress={onCurrencyChangePress}
+        />
       </View>
     </>
   );
@@ -25,7 +30,9 @@ const Settings = ({ themeName, onThemeChangePress }) => {
 
 Settings.propTypes = {
   themeName: PropTypes.string.isRequired,
+  currencyName: PropTypes.string.isRequired,
   onThemeChangePress: PropTypes.func.isRequired,
+  onCurrencyChangePress: PropTypes.func.isRequired,
 };
 
 export default Settings;

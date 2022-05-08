@@ -12,8 +12,9 @@ import { capitalizeString } from '../../utils';
 import Settings from '../../components/Settings';
 import FooterCredits from '../../components/FooterCredits';
 
-const MoreScreen = () => {
+const MoreScreen = ({ navigation }) => {
   const currentTheme = useSelector((state) => state.settings.theme.name);
+  const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
 
   const dispatch = useDispatch();
 
@@ -46,11 +47,17 @@ const MoreScreen = () => {
     );
   };
 
+  const handleCurrencyChangePress = () => {
+    navigation.navigate('Select Currency');
+  };
+
   return (
     <ScrollView contentContainerStyle={sharedStyles.screenContainer}>
       <Settings
         themeName={capitalizeString(currentTheme)}
+        currencyName={referenceCurrency.toUpperCase()}
         onThemeChangePress={handleThemeChangePress}
+        onCurrencyChangePress={handleCurrencyChangePress}
       />
       <FooterCredits />
     </ScrollView>

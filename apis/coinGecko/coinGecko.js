@@ -73,3 +73,5 @@ export const fetchExchangeMarkets = (exchangeId, page) =>
 export const fetchTrendingSearches = () => coinGecko.get('search/trending');
 
 export const fetchSearchResults = (searchQuery) => coinGecko.get(`search?query=${searchQuery}`);
+
+export const fetchSupportedCurrencies = () => coinGecko.get('simple/supported_vs_currencies');

@@ -22,3 +22,6 @@ export { default as setSearchQuery } from './setSearchQuery';
 export { default as getSearchResults } from './getSearchResults';
 export { default as clearSearchResults } from './clearSearchResults';
 export { default as setTheme } from './setTheme';
+export { default as getSupportedCurrencies } from './getSupportedCurrencies';
+export { default as selectCurrency } from './selectCurrency';
+export { default as setCurrencyToFind } from './setCurrencyToFind';

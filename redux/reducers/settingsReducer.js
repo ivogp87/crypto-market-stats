@@ -5,6 +5,8 @@ import {
   SET_COIN_CHART_TYPE,
   SET_CHART_VARIANT,
   SET_THEME,
+  SELECT_CURRENCY,
+  CURRENCY_TO_FIND,
 } from '../actionTypes';
 import { themeNames } from '../../styles/themes';
 
@@ -19,6 +21,7 @@ const initialState = {
     priceChangeInterval: '24h',
   },
   referenceCurrency: 'usd',
+  currencyToFind: '', // used for searching in the list of supported reference currencies
   showSparkline: true,
   favoriteCoinIds: [],
   coinChartSettings: {
@@ -54,9 +57,12 @@ const settingsReducer = (state = initialState, action) => {
       const newCoinChartSettings = { ...state.coinChartSettings, chartVariant: action.payload };
       return { ...state, coinChartSettings: newCoinChartSettings };
     }
-    case SET_THEME: {
+    case SET_THEME:
       return { ...state, theme: action.payload };
-    }
+    case SELECT_CURRENCY:
+      return { ...state, referenceCurrency: action.payload };
+    case CURRENCY_TO_FIND:
+      return { ...state, currencyToFind: action.payload };
     default:
       return state;
   }
