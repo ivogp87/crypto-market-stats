@@ -13,7 +13,7 @@ import Settings from '../../components/Settings';
 import FooterCredits from '../../components/FooterCredits';
 
 const MoreScreen = ({ navigation }) => {
-  const currentTheme = useSelector((state) => state.settings.theme.name);
+  const { name: currentTheme, useDeviceTheme } = useSelector((state) => state.settings.theme);
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
 
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const MoreScreen = ({ navigation }) => {
 
   const handleThemeChangePress = () => {
     const cancelButtonIndex = 3;
-    const themes = ['Auto', ...themeNames.map((name) => capitalizeString(name))];
+    const themes = ['Auto', ...themeNames.map((name) => capitalizeString(name))]; // Auto - automatically switch to light/dark based on device settings
 
     showActionSheetWithOptions(
       {
@@ -54,7 +54,7 @@ const MoreScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={sharedStyles.screenContainer}>
       <Settings
-        themeName={capitalizeString(currentTheme)}
+        themeName={capitalizeString(useDeviceTheme ? 'Auto' : currentTheme)}
         currencyName={referenceCurrency.toUpperCase()}
         onThemeChangePress={handleThemeChangePress}
         onCurrencyChangePress={handleCurrencyChangePress}
