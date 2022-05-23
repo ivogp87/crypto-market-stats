@@ -5,7 +5,7 @@ const themedStyles = (colors, color) =>
     buttonGroup: {
       backgroundColor: color === 'primary' ? colors.bgPrimary : colors.bgSecondary,
       minHeight: 42,
-      paddingVertical: 8,
+      marginVertical: 8,
       paddingLeft: 16,
     },
   });

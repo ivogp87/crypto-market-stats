@@ -10,6 +10,10 @@ const sharedStyles = StyleSheet.create({
     marginTop: 8,
     marginHorizontal: 16,
   },
+
+  flexOne: {
+    flex: 1,
+  },
 });
 
 export default sharedStyles;

@@ -19,12 +19,14 @@
       "supportsTablet": true
     },
     "android": {
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#020C1B"
       }
     },
     "web": {
+      "userInterfaceStyle": "automatic",
       "favicon": "./assets/favicon.png"
     }
   }
