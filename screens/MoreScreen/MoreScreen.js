@@ -10,6 +10,7 @@ import { useTheme, useStyles } from '../../hooks';
 import { capitalizeString } from '../../utils';
 
 import Settings from '../../components/Settings';
+import AboutUs from '../../components/AboutUs';
 import FooterCredits from '../../components/FooterCredits';
 
 const MoreScreen = ({ navigation }) => {
@@ -59,6 +60,7 @@ const MoreScreen = ({ navigation }) => {
         onThemeChangePress={handleThemeChangePress}
         onCurrencyChangePress={handleCurrencyChangePress}
       />
+      <AboutUs />
       <FooterCredits />
     </ScrollView>
   );
