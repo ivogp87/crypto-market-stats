@@ -44,7 +44,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "victory-native": "^35.3.2"
+    "victory-native": "^35.3.2",
+    "expo-firebase-analytics": "~7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

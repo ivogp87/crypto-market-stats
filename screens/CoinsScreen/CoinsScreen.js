@@ -3,6 +3,8 @@ import { View, FlatList, useWindowDimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import * as Analytics from 'expo-firebase-analytics';
+
 import {
   getCoins,
   getCoinsNextPage,
@@ -90,6 +92,14 @@ const CoinsScreen = ({ navigation, route }) => {
     category,
     displayFavoriteCoins,
   ]);
+
+  useEffect(() => {
+    const logInitialScreenView = async () => {
+      await Analytics.logEvent('screen_view', 'Coins');
+    };
+
+    logInitialScreenView();
+  }, []);
 
   const { navigate } = navigation;
   const handleCoinPress = useCallback(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
@@ -7,6 +7,7 @@ import { useColorScheme, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import PropTypes from 'prop-types';
+import * as Analytics from 'expo-firebase-analytics';
 
 import themes from './styles/themes';
 import { sharedStyles } from './styles';
@@ -26,12 +27,35 @@ const AppContainer = ({ onLayout }) => {
       ? findTheme(deviceColorScheme)
       : findTheme(selectedTheme) || themes[0];
 
+  const navigationRef = useRef();
+  const routeNameRef = useRef();
+
+  const handleNavigationReady = () => {
+    routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+  };
+
+  const handleStateChange = async () => {
+    const previousRouteName = routeNameRef.current;
+    const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+    if (previousRouteName !== currentRouteName) {
+      await Analytics.logEvent('screen_view', currentRouteName);
+    }
+
+    routeNameRef.current = currentRouteName;
+  };
+
   return (
     <GestureHandlerRootView style={sharedStyles.flexOne}>
       <View onLayout={onLayout} style={sharedStyles.flexOne}>
         <StatusBar style={theme.dark ? 'light' : 'dark'} />
         <ActionSheetProvider>
-          <NavigationContainer theme={theme}>
+          <NavigationContainer
+            theme={theme}
+            ref={navigationRef}
+            onReady={handleNavigationReady}
+            onStateChange={handleStateChange}
+          >
             <RootNavigator />
           </NavigationContainer>
         </ActionSheetProvider>
