@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "crypto_market_stats",
-    "slug": "crypto_market_stats",
+    "name": "CryptoMarketStats",
+    "slug": "crypto-market-stats",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,7 +25,8 @@
         "backgroundColor": "#020C1B"
       },
       "package": "net.cryptomarketstats",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 1
     },
     "web": {
       "userInterfaceStyle": "automatic",
