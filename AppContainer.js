@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
@@ -8,13 +8,23 @@ import { useSelector } from 'react-redux';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import PropTypes from 'prop-types';
 import * as Analytics from 'expo-firebase-analytics';
+import * as Notifications from 'expo-notifications';
 
 import themes from './styles/themes';
 import { sharedStyles } from './styles';
+import { registerForPushNotificationsAsync } from './utils';
 
 import RootNavigator from './navigation/RootNavigator';
 
 enableScreens();
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true, // original was false
+    shouldSetBadge: false,
+  }),
+});
 
 const AppContainer = ({ onLayout }) => {
   const deviceColorScheme = useColorScheme();
@@ -44,6 +54,10 @@ const AppContainer = ({ onLayout }) => {
 
     routeNameRef.current = currentRouteName;
   };
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+  }, []);
 
   return (
     <GestureHandlerRootView style={sharedStyles.flexOne}>
