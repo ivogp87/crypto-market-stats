@@ -29,8 +29,8 @@ const SelectCurrencyScreen = ({ route }) => {
 
   if (currencyToFind) {
     const filterCurrency = (currency) =>
-      currency.name.toLowerCase().includes(currencyToFind) ||
-      currency.symbol.toLowerCase().includes(currencyToFind);
+      currency.name.toLowerCase().includes(currencyToFind?.toLowerCase()) ||
+      currency.symbol.toLowerCase().includes(currencyToFind?.toLowerCase());
 
     cryptoCurrenciesList = cryptoCurrenciesList?.filter(filterCurrency);
     fiatCurrenciesList = fiatCurrenciesList?.filter(filterCurrency);
