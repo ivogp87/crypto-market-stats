@@ -30,9 +30,11 @@ const CoinOverviewScreen = ({ route }) => {
   const coinId = route?.params?.id;
   const coinDetails = useSelector((state) => state.coinDetails.coinDetails[coinId]);
   const coinDetailsStatus = useSelector((state) => state.coinDetails.status);
-  const { lineChart, candlestickChart, status: coinChartStatus } = useSelector(
-    (state) => state.coinChart
-  );
+  const {
+    lineChart,
+    candlestickChart,
+    status: coinChartStatus,
+  } = useSelector((state) => state.coinChart);
   const referenceCurrency = useSelector((state) => state.settings.referenceCurrency);
   const { timeInterval, chartType, chartVariant } = useSelector(
     (state) => state.settings.coinChartSettings
@@ -165,6 +167,15 @@ const CoinOverviewScreen = ({ route }) => {
 
   const buttonIcon = Platform.OS === 'android' ? 'md-swap-vertical' : 'ios-swap-vertical';
 
+  const showLineChart =
+    (lineChartData || coinChartLoading) &&
+    (chartVariant === 'line chart' || chartType === 'volume' || chartType === 'market cap');
+
+  const showCandlestickChart =
+    (candlestickChartData || coinChartLoading) &&
+    chartVariant === 'candlestick chart' &&
+    chartType === 'price';
+
   return (
     <ScrollView
       style={sharedStyles.screenContainer}
@@ -175,10 +186,10 @@ const CoinOverviewScreen = ({ route }) => {
         priceChangePercentage={coinDetails.market_data.price_change_percentage_24h}
         referenceCurrency={referenceCurrency}
       />
-      {(lineChartData || coinChartLoading) && chartVariant === 'line chart' && (
+      {showLineChart && (
         <Chart data={lineChartData} isLoading={coinChartLoading} error={coinChartError} />
       )}
-      {(candlestickChartData || coinChartLoading) && chartVariant === 'candlestick chart' && (
+      {showCandlestickChart && (
         <CandlestickChart
           data={candlestickChartData}
           isLoading={coinChartLoading}
