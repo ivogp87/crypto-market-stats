@@ -30,7 +30,7 @@ const AppContainer = ({ onLayout }) => {
   const deviceColorScheme = useColorScheme();
   const { name: selectedTheme, useDeviceTheme } = useSelector((state) => state.settings.theme);
   const findTheme = (themeName) =>
-    themes.find(({ name }) => name.toLocaleLowerCase() === themeName.toLocaleLowerCase());
+    themes.find(({ name }) => name.toLowerCase() === themeName?.toLowerCase());
 
   const theme =
     useDeviceTheme && deviceColorScheme
