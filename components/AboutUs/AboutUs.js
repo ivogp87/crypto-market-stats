@@ -18,7 +18,12 @@ const AboutUs = () => {
         About
       </Heading>
       <View style={styles.aboutUs}>
-        <Link href="mailto:hello@cryptomarketstats.net" size="large" style={styles.link}>
+        <Link
+          href="mailto:hello@cryptomarketstats.net"
+          target="browser"
+          size="large"
+          style={styles.link}
+        >
           Contact Us
         </Link>
         <Link
