@@ -60,7 +60,9 @@ const AppContainer = ({ onLayout }) => {
   }, []);
 
   return (
-    <GestureHandlerRootView style={sharedStyles.flexOne}>
+    <GestureHandlerRootView
+      style={{ ...sharedStyles.flexOne, backgroundColor: theme.colors.background }}
+    >
       <View onLayout={onLayout} style={sharedStyles.flexOne}>
         <StatusBar style={theme.dark ? 'light' : 'dark'} />
         <ActionSheetProvider>
