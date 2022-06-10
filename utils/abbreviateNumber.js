@@ -5,7 +5,8 @@ import * as Localization from 'expo-localization';
 // abbreviateNumber(1100) => '1.1 K'
 // abbreviateNumber('235700') => '235,7 K'
 const abbreviateNumber = (number) => {
-  if (number === null) return 'n/a';
+  // eslint-disable-next-line no-restricted-globals
+  if (number === null || isNaN(number) || number > Number.MAX_SAFE_INTEGER) return 'n/a';
 
   return millify(Number(number), {
     space: true,

@@ -30,37 +30,49 @@ const CoinInfo = ({
       textLeft="Market Cap"
       textRight={formatAndAbbreviateCurrency(marketCap, referenceCurrency)}
     />
-    {maxSupply && <DividedRow textLeft="Max Supply" textRight={abbreviateNumber(maxSupply)} />}
-    {totalSupply && (
+    {!!maxSupply && <DividedRow textLeft="Max Supply" textRight={abbreviateNumber(maxSupply)} />}
+    {!!totalSupply && (
       <DividedRow textLeft="Total Supply" textRight={abbreviateNumber(totalSupply)} />
     )}
-    <DividedRow textLeft="Circulating Supply" textRight={abbreviateNumber(circulatingSupply)} />
+    {!!circulatingSupply && (
+      <DividedRow textLeft="Circulating Supply" textRight={abbreviateNumber(circulatingSupply)} />
+    )}
     <Heading
       iconName={Platform.OS === 'android' ? 'md-logo-usd' : 'ios-logo-usd'}
       style={styles.marginTop}
     >
       Trade
     </Heading>
-    <DividedRow
-      textLeft="Trade Volume (24h)"
-      textRight={formatAndAbbreviateCurrency(tradeVolume, referenceCurrency)}
-    />
-    <DividedRow
-      textLeft="High (24h)"
-      textRight={formatAndAbbreviateCurrency(high, referenceCurrency)}
-    />
-    <DividedRow
-      textLeft="Low (24h)"
-      textRight={formatAndAbbreviateCurrency(low, referenceCurrency)}
-    />
-    <DividedRow
-      textLeft="All Time High"
-      textRight={formatAndAbbreviateCurrency(allTimeHigh, referenceCurrency)}
-    />
-    <DividedRow
-      textLeft="All Time Low"
-      textRight={formatAndAbbreviateCurrency(allTimeLow, referenceCurrency)}
-    />
+    {!!tradeVolume && (
+      <DividedRow
+        textLeft="Trade Volume (24h)"
+        textRight={formatAndAbbreviateCurrency(tradeVolume, referenceCurrency)}
+      />
+    )}
+    {!!high && (
+      <DividedRow
+        textLeft="High (24h)"
+        textRight={formatAndAbbreviateCurrency(high, referenceCurrency)}
+      />
+    )}
+    {!!low && (
+      <DividedRow
+        textLeft="Low (24h)"
+        textRight={formatAndAbbreviateCurrency(low, referenceCurrency)}
+      />
+    )}
+    {!!allTimeHigh && (
+      <DividedRow
+        textLeft="All Time High"
+        textRight={formatAndAbbreviateCurrency(allTimeHigh, referenceCurrency)}
+      />
+    )}
+    {!!allTimeLow && (
+      <DividedRow
+        textLeft="All Time Low"
+        textRight={formatAndAbbreviateCurrency(allTimeLow, referenceCurrency)}
+      />
+    )}
   </ScrollView>
 );
 
