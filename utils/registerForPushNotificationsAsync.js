@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 const registerForPushNotificationsAsync = async () => {
   let token;
@@ -14,7 +15,12 @@ const registerForPushNotificationsAsync = async () => {
     if (finalStatus !== 'granted') {
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
+
+    const pushToken = await Notifications.getExpoPushTokenAsync({
+      projectId: Constants.expoConfig.extra.eas.projectId,
+    });
+
+    token = pushToken.data;
   } else {
     // eslint-disable-next-line no-console
     console.warn('Must use physical device for Push Notifications');
