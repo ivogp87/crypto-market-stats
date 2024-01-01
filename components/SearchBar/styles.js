@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const themedStyles = (colors) =>
   StyleSheet.create({
@@ -10,11 +10,13 @@ const themedStyles = (colors) =>
       paddingBottom: 6,
       backgroundColor: colors.bgPrimary,
       borderRadius: 8,
+      minWidth: Platform.OS === 'ios' ? '70%' : 'auto',
     },
 
     textInput: {
       flex: 1,
       color: colors.textPrimary,
+      paddingVertical: Platform.OS === 'ios' ? 4 : 0,
     },
   });
 
