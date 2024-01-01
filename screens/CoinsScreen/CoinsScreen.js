@@ -282,22 +282,24 @@ const CoinsScreen = ({ navigation, route }) => {
 
   return (
     <View style={sharedStyles.screenContainer}>
-      <ButtonGroup style={styles.buttonGroup}>
-        <ButtonGroup.Item
-          onPress={handleOrderByPress}
-          title={orderByBtnTitle}
-          iconRight={orderByBtnIcon}
-          rounded
-        />
-        <ButtonGroup.Item
-          onPress={handlePriceChangeIntervalPress}
-          title={priceChangeIntervalBtnTitle}
-          rounded
-        />
-        {!displayFavoriteCoins && (
-          <ButtonGroup.Item onPress={handleCategoryPress} title={categoryBtnTitle} rounded />
-        )}
-      </ButtonGroup>
+      <View>
+        <ButtonGroup style={styles.buttonGroup}>
+          <ButtonGroup.Item
+            onPress={handleOrderByPress}
+            title={orderByBtnTitle}
+            iconRight={orderByBtnIcon}
+            rounded
+          />
+          <ButtonGroup.Item
+            onPress={handlePriceChangeIntervalPress}
+            title={priceChangeIntervalBtnTitle}
+            rounded
+          />
+          {!displayFavoriteCoins && (
+            <ButtonGroup.Item onPress={handleCategoryPress} title={categoryBtnTitle} rounded />
+          )}
+        </ButtonGroup>
+      </View>
       <FlatList
         style={styles.coins}
         onRefresh={handleRefresh}
