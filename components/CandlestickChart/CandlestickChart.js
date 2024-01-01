@@ -54,7 +54,7 @@ const CandlestickChart = ({ data, isLoading, error }) => {
           fixLabelOverlap
           style={{
             axis: { stroke: 'transparent' },
-            tickLabels: { fill: colors.textPrimary, fontSize: 0 },
+            tickLabels: { fill: 'transparent', fontSize: 0 },
           }}
         />
         <VictoryAxis
