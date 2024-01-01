@@ -19,7 +19,6 @@ const getTrendingSearches = () => async (dispatch) => {
     const { data } = await fetchTrendingSearches();
     const trendingSearches = {
       coins: data.coins.map((coin) => coin.item), // the data is inside item property
-      exchanges: data.exchanges.map((exchange) => exchange.item),
       lastUpdated: new Date(),
     };
     dispatch(trendingSearchesSuccess(trendingSearches));

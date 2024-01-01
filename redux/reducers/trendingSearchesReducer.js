@@ -8,7 +8,6 @@ const initialState = {
   status: 'idle',
   error: null,
   coins: [],
-  exchanges: [],
   lastUpdated: null,
 };
 
