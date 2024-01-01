@@ -21,9 +21,12 @@ import AppButton from '../../components/AppButton';
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
-  const { searchQuery, coins, exchanges, status: searchResultsStatus } = useSelector(
-    (state) => state.searchResults
-  );
+  const {
+    searchQuery,
+    coins,
+    exchanges,
+    status: searchResultsStatus,
+  } = useSelector((state) => state.searchResults);
 
   const currencyToFind = useSelector((state) => state.settings.currencyToFind);
 
@@ -60,7 +63,7 @@ const RootNavigator = () => {
   };
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerBackTitleVisible: false }}>
       <Stack.Screen name="Home" component={HomeNavigator} />
       <Stack.Screen name="Coin" component={CoinNavigator} />
       <Stack.Screen name="Exchange" component={ExchangeNavigator} />
