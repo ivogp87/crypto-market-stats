@@ -133,14 +133,19 @@ const CoinOverviewScreen = ({ route }) => {
     atl,
   } = coinDetails.market_data;
 
-  const getPriceChangeData = (period) => ({
-    period,
-    percentChange: coinDetails.market_data[`price_change_percentage_${period.toLowerCase()}`],
-    priceChange:
-      coinDetails.market_data?.[`price_change_percentage_${period.toLowerCase()}_in_currency`][
-        referenceCurrency
-      ],
-  });
+  const coinPrice = current_price[referenceCurrency];
+
+  const getPriceChangeData = (period) => {
+    const percentChange =
+      coinDetails.market_data[`price_change_percentage_${period.toLowerCase()}`];
+
+    return {
+      period,
+      percentChange,
+      priceChange: coinPrice * (percentChange / 100),
+    };
+  };
+
   const priceChangeData = ['24H', '7D', '14D', '30D', '60D', '200D', '1Y'].map((period) =>
     getPriceChangeData(period)
   );
@@ -182,7 +187,7 @@ const CoinOverviewScreen = ({ route }) => {
       refreshControl={<RefreshControl refreshing={false} onRefresh={getCoinData} />}
     >
       <CoinPrice
-        price={current_price[referenceCurrency]}
+        price={coinPrice}
         priceChangePercentage={coinDetails.market_data.price_change_percentage_24h}
         referenceCurrency={referenceCurrency}
       />
