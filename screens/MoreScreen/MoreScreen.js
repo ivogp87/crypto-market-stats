@@ -27,7 +27,7 @@ const MoreScreen = ({ navigation }) => {
 
   const handleThemeChangePress = () => {
     const cancelButtonIndex = 3;
-    const themes = ['Auto', ...themeNames.map((name) => capitalizeString(name))]; // Auto - automatically switch to light/dark based on device settings
+    const themes = ['Device theme', ...themeNames.map((name) => capitalizeString(name))];
 
     showActionSheetWithOptions(
       {
@@ -55,7 +55,7 @@ const MoreScreen = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={sharedStyles.screenContainer}>
       <Settings
-        themeName={capitalizeString(useDeviceTheme ? 'Auto' : currentTheme)}
+        themeName={useDeviceTheme ? 'Device theme' : capitalizeString(currentTheme)}
         currencyName={referenceCurrency.toUpperCase()}
         onThemeChangePress={handleThemeChangePress}
         onCurrencyChangePress={handleCurrencyChangePress}
