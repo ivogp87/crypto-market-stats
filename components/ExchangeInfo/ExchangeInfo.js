@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import styles from './styles';
 import { formatAndAbbreviateCurrency, formatLinkAnchor } from '../../utils';
@@ -22,9 +22,7 @@ const ExchangeInfo = ({
   description,
 }) => (
   <ScrollView style={styles.exchangeInfo}>
-    <Heading iconName={Platform.OS === 'android' ? 'md-stats-chart' : 'ios-stats-chart'}>
-      Stats
-    </Heading>
+    <Heading iconName="stats-chart">Stats</Heading>
     <DividedRow textLeft="Rank" textRight={rank} />
     {!!tradeVolume && (
       <DividedRow

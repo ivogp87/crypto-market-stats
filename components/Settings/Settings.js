@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import themedStyles from './styles';
@@ -13,9 +13,7 @@ const Settings = ({ themeName, currencyName, onThemeChangePress, onCurrencyChang
 
   return (
     <>
-      <Heading iconName={Platform.OS === 'android' ? 'md-settings-sharp' : 'ios-settings-sharp'}>
-        Settings
-      </Heading>
+      <Heading iconName="settings-sharp">Settings</Heading>
       <View style={styles.settingsList}>
         <DividedRow textLeft="Theme" textRight={themeName} onPress={onThemeChangePress} />
         <DividedRow

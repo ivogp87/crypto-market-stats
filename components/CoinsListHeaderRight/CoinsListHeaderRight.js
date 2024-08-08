@@ -1,17 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Platform } from 'react-native';
 import { Item } from 'react-navigation-header-buttons';
 
 import AppHeaderButtons from '../AppHeaderButtons';
 
 const CoinsListHeaderRight = ({ onSearch }) => (
   <AppHeaderButtons>
-    <Item
-      title="search"
-      iconName={Platform.OS === 'android' ? 'md-search' : 'ios-search'}
-      onPress={onSearch}
-    />
+    <Item title="search" iconName="search" onPress={onSearch} />
   </AppHeaderButtons>
 );
 

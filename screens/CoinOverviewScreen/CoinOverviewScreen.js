@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ScrollView, useWindowDimensions, Platform, RefreshControl } from 'react-native';
+import { ScrollView, useWindowDimensions, RefreshControl } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { useActionSheet } from '@expo/react-native-action-sheet';
 
@@ -170,8 +170,6 @@ const CoinOverviewScreen = ({ route }) => {
     />
   ));
 
-  const buttonIcon = Platform.OS === 'android' ? 'md-swap-vertical' : 'ios-swap-vertical';
-
   const showLineChart =
     (lineChartData || coinChartLoading) &&
     (chartVariant === 'line chart' || chartType === 'volume' || chartType === 'market cap');
@@ -208,7 +206,7 @@ const CoinOverviewScreen = ({ route }) => {
           onPress={handleChartVariantChange}
           size="small"
           color="info"
-          iconLeft={buttonIcon}
+          iconLeft="swap-vertical"
           rounded
           variant="outline"
           textTransform="capitalize"
@@ -218,7 +216,7 @@ const CoinOverviewScreen = ({ route }) => {
           onPress={handleChartTypeChange}
           size="small"
           color="info"
-          iconLeft={buttonIcon}
+          iconLeft="swap-vertical"
           rounded
           variant="outline"
           textTransform="capitalize"

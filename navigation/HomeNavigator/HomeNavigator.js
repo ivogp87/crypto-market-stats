@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import CoinsScreen from '../../screens/CoinsScreen';
@@ -52,11 +51,7 @@ const HomeNavigator = ({ navigation, route }) => {
         options={{
           tabBarLabel: 'Coins',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name={Platform.OS === 'android' ? 'md-stats-chart' : 'ios-stats-chart'}
-              color={color}
-              size={size}
-            />
+            <Ionicons name="stats-chart" color={color} size={size} />
           ),
         }}
         initialParams={{ displayFavoriteCoins: false }}
@@ -67,13 +62,7 @@ const HomeNavigator = ({ navigation, route }) => {
         initialParams={{ displayFavoriteCoins: true }}
         options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name={Platform.OS === 'android' ? 'md-star' : 'ios-star'}
-              color={color}
-              size={size}
-            />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="star" color={color} size={size} />,
         }}
       />
       <Tab.Screen
@@ -81,13 +70,7 @@ const HomeNavigator = ({ navigation, route }) => {
         component={ExchangesScreen}
         options={{
           tabBarLabel: 'Exchanges',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name={Platform.OS === 'android' ? 'md-repeat' : 'ios-repeat'}
-              color={color}
-              size={size}
-            />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="repeat" color={color} size={size} />,
         }}
       />
       <Tab.Screen
@@ -96,13 +79,7 @@ const HomeNavigator = ({ navigation, route }) => {
         options={{
           tabBarLabel: 'More',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons
-              name={
-                Platform.OS === 'android' ? 'md-ellipsis-horizontal' : 'ios-ellipsis-horizontal'
-              }
-              color={color}
-              size={size}
-            />
+            <Ionicons name="ellipsis-horizontal" color={color} size={size} />
           ),
         }}
       />

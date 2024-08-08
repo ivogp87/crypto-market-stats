@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable, Platform, useWindowDimensions } from 'react-native';
+import { View, Pressable, useWindowDimensions } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import { VictoryLine, VictoryContainer } from 'victory-native';
@@ -36,13 +36,6 @@ const CoinStatsCard = ({
   }
   if (Number(priceChangePercent) < 0) {
     priceChangeColor = 'danger';
-  }
-
-  let favoriteIconName;
-  if (isFavorite) {
-    favoriteIconName = Platform.OS === 'android' ? 'md-star' : 'ios-star';
-  } else {
-    favoriteIconName = Platform.OS === 'android' ? 'md-star-outline' : 'ios-star-outline';
   }
 
   return (
@@ -88,7 +81,7 @@ const CoinStatsCard = ({
         </View>
         <Pressable onPress={onFavorite} hitSlop={16}>
           <Ionicons
-            name={favoriteIconName}
+            name={isFavorite ? 'star' : 'star-outline'}
             size={16}
             color={isFavorite ? colors.warning : colors.textPrimary}
           />

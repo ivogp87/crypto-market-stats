@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable, Platform } from 'react-native';
+import { View, Pressable } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -26,13 +26,6 @@ const SearchResult = ({
 }) => {
   const styles = useStyles(themedStyles, showBorder);
   const colors = useColors();
-
-  let favoriteIconName;
-  if (isFavorite) {
-    favoriteIconName = Platform.OS === 'android' ? 'md-star' : 'ios-star';
-  } else {
-    favoriteIconName = Platform.OS === 'android' ? 'md-star-outline' : 'ios-star-outline';
-  }
 
   const handlePress = () => {
     onPress(id, name, iconUrl, symbol);
@@ -70,7 +63,7 @@ const SearchResult = ({
         {onFavorite && (
           <Pressable onPress={handleFavorite} hitSlop={16}>
             <Ionicons
-              name={favoriteIconName}
+              name={isFavorite ? 'star' : 'star-outline'}
               size={16}
               color={isFavorite ? colors.warning : colors.textPrimary}
             />

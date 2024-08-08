@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform, Share } from 'react-native';
+import { View, Share } from 'react-native';
 
 import themedStyles from './styles';
 import { useStyles } from '../../hooks';
@@ -24,11 +24,7 @@ const AboutUs = () => {
 
   return (
     <>
-      <Heading
-        iconName={Platform.OS === 'android' ? 'md-information-circle' : 'ios-information-circle'}
-      >
-        About
-      </Heading>
+      <Heading iconName="information-circle">About</Heading>
       <View style={styles.aboutUs}>
         <Link
           href="mailto:hello@cryptomarketstats.net"

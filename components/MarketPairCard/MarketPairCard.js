@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -41,11 +41,7 @@ const MarketPairCard = ({
             {`${baseCurrency} / ${targetCurrency}`}
           </AppText>
           <View style={styles.nameContainer}>
-            <Ionicons
-              name={Platform.OS === 'android' ? 'md-shield-checkmark' : 'ios-shield-checkmark'}
-              size={16}
-              color={colors[trustScoreColor]}
-            />
+            <Ionicons name="shield-checkmark" size={16} color={colors[trustScoreColor]} />
             <AppText color="secondary" numberOfLines={1} style={styles.name}>
               {name}
             </AppText>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Pressable, Platform } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 
@@ -35,13 +35,7 @@ const CurrencyCard = ({ currencyName, currencySymbol, logoUrl, isSelected, onPre
           </AppText>
         </View>
       </View>
-      {isSelected && (
-        <Ionicons
-          name={Platform.OS === 'android' ? 'md-checkmark' : 'ios-checkmark'}
-          size={16}
-          color={colors.success}
-        />
-      )}
+      {isSelected && <Ionicons name="checkmark" size={16} color={colors.success} />}
     </Pressable>
   );
 };

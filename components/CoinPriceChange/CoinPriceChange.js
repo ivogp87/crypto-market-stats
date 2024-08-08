@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import styles from './styles';
 import Heading from '../Heading';
@@ -11,7 +11,7 @@ const CoinPriceChange = ({ data, referenceCurrency }) => {
 
   return (
     <View style={styles.coinPriceChange}>
-      <Heading iconName={Platform.OS === 'android' ? 'md-pulse' : 'ios-pulse'}>Prices</Heading>
+      <Heading iconName="pulse">Prices</Heading>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { Item } from 'react-navigation-header-buttons';
 
@@ -13,7 +12,7 @@ const CoinHeaderRight = ({ onFavorite, isFavoriteCoin }) => {
     <AppHeaderButtons>
       <Item
         title="search"
-        iconName={Platform.OS === 'android' ? 'md-star-outline' : 'ios-star-outline'}
+        iconName="star-outline"
         buttonStyle={{ color: isFavoriteCoin ? warning : textPrimary }}
         onPress={onFavorite}
       />

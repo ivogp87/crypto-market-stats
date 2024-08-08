@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, Platform } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import styles from './styles';
 import { formatAndAbbreviateCurrency, abbreviateNumber } from '../../utils';
@@ -22,9 +22,7 @@ const CoinInfo = ({
   allTimeLow,
 }) => (
   <ScrollView style={styles.coinInfo}>
-    <Heading iconName={Platform.OS === 'android' ? 'md-stats-chart' : 'ios-stats-chart'}>
-      Market
-    </Heading>
+    <Heading iconName="stats-chart">Market</Heading>
     <DividedRow textLeft="Rank" textRight={rank} />
     <DividedRow
       textLeft="Market Cap"
@@ -37,10 +35,7 @@ const CoinInfo = ({
     {!!circulatingSupply && (
       <DividedRow textLeft="Circulating Supply" textRight={abbreviateNumber(circulatingSupply)} />
     )}
-    <Heading
-      iconName={Platform.OS === 'android' ? 'md-logo-usd' : 'ios-logo-usd'}
-      style={styles.marginTop}
-    >
+    <Heading iconName="logo-usd" style={styles.marginTop}>
       Trade
     </Heading>
     {!!tradeVolume && (

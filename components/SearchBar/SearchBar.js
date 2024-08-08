@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Animated, Easing, View, TextInput, Platform } from 'react-native';
+import { Animated, Easing, View, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
 
@@ -48,12 +48,7 @@ const SearchBar = ({ text, placeholder, isSearching, onChangeText, onSubmitEditi
         placeholderTextColor={colors.textPrimary}
       />
       {!!text && !isSearching && (
-        <Ionicons
-          name={Platform.OS === 'android' ? 'md-close' : 'ios-close'}
-          size={16}
-          color={colors.textPrimary}
-          onPress={onClear}
-        />
+        <Ionicons name="close" size={16} color={colors.textPrimary} onPress={onClear} />
       )}
       {isSearching && (
         <Animated.View style={{ transform: [{ rotate: spin }] }}>
