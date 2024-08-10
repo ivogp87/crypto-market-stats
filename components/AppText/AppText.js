@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import themedStyles from './styles';
 import { useStyles } from '../../hooks';
 
-const AppText = ({ size, color, bold, style, children, ...rest }) => {
+const AppText = ({ size = 'medium', color = 'primary', bold, style, children, ...rest }) => {
   const styles = useStyles(themedStyles, size, color, bold);
   return (
     <Text style={StyleSheet.compose(styles.text, style)} {...rest}>
@@ -19,13 +19,6 @@ AppText.propTypes = {
   bold: PropTypes.bool,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   children: PropTypes.node.isRequired,
-};
-
-AppText.defaultProps = {
-  size: 'medium',
-  color: 'primary',
-  bold: false,
-  style: {},
 };
 
 export default AppText;

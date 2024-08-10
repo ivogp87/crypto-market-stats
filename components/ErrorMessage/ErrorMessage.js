@@ -22,10 +22,4 @@ ErrorMessage.propTypes = {
   style: stylePropTypes,
 };
 
-ErrorMessage.defaultProps = {
-  children: null,
-  stretch: false,
-  style: null,
-};
-
 export default ErrorMessage;

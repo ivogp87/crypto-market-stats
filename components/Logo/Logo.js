@@ -9,7 +9,7 @@ import { stylePropTypes } from '../../utils';
 const placeholder =
   'https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@9ab8d6934b83a4aa8ae5e8711609a70ca0ab1b2b/128/color/generic.png';
 
-const Logo = ({ url, size, style }) => {
+const Logo = ({ url, size = 'medium', style }) => {
   const dimensions = iconSize[size] || iconSize.medium;
 
   const styles = StyleSheet.compose(
@@ -27,12 +27,6 @@ Logo.propTypes = {
   url: PropTypes.string,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   style: stylePropTypes,
-};
-
-Logo.defaultProps = {
-  url: null,
-  size: 'medium',
-  style: null,
 };
 
 export default Logo;

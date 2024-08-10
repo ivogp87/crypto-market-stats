@@ -5,7 +5,7 @@ import * as WebBrowser from 'expo-web-browser';
 
 import AppText from '../AppText';
 
-const Link = ({ children, href, target, ...props }) => {
+const Link = ({ children, href, target = 'in app', ...props }) => {
   const handlePress = () => {
     if (target === 'browser') {
       Linking.openURL(href);
@@ -25,10 +25,6 @@ Link.propTypes = {
   href: PropTypes.string.isRequired,
   target: PropTypes.oneOf(['in app', 'browser']),
   children: PropTypes.string.isRequired,
-};
-
-Link.defaultProps = {
-  target: 'in app',
 };
 
 export default Link;

@@ -28,9 +28,4 @@ Heading.propTypes = {
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
-Heading.defaultProps = {
-  iconName: null,
-  style: {},
-};
-
 export default Heading;

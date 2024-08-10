@@ -25,9 +25,4 @@ HeaderLogoTitle.propTypes = {
   iconUrl: PropTypes.string,
 };
 
-HeaderLogoTitle.defaultProps = {
-  symbol: null,
-  iconUrl: null,
-};
-
 export default HeaderLogoTitle;

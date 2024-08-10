@@ -88,8 +88,4 @@ CandlestickChart.propTypes = {
   error: PropTypes.bool,
 };
 
-CandlestickChart.defaultProps = {
-  data: null,
-  error: false,
-};
 export default CandlestickChart;

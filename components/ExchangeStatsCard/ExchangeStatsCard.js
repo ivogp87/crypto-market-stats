@@ -54,8 +54,4 @@ ExchangeStatsCard.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
-ExchangeStatsCard.defaultProps = {
-  rank: null,
-};
-
 export default ExchangeStatsCard;

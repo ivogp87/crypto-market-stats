@@ -38,10 +38,4 @@ DividedRow.propTypes = {
   onPress: PropTypes.func,
 };
 
-DividedRow.defaultProps = {
-  textRight: null,
-  children: null,
-  onPress: null,
-};
-
 export default DividedRow;

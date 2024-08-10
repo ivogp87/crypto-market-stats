@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import themedStyles from './styles';
 import { useStyles } from '../../hooks';
 
-const ListItemSeparator = ({ color, size, style }) => {
+const ListItemSeparator = ({ color = 'primary', size, style }) => {
   const styles = useStyles(themedStyles);
 
   return (
@@ -19,12 +19,6 @@ ListItemSeparator.propTypes = {
   color: PropTypes.oneOf(['primary', 'secondary']),
   size: PropTypes.number,
   style: PropTypes.shape({}),
-};
-
-ListItemSeparator.defaultProps = {
-  color: 'primary',
-  size: 1,
-  style: {},
 };
 
 export default ListItemSeparator;

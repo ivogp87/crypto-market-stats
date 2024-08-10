@@ -5,7 +5,7 @@ import styles from './styles';
 import { useColors } from '../../hooks';
 import { stylePropTypes } from '../../utils';
 
-const Spinner = ({ size, stretch, style }) => {
+const Spinner = ({ size = 'small', stretch, style }) => {
   const { textPrimary } = useColors();
 
   return (
@@ -19,12 +19,6 @@ Spinner.propTypes = {
   size: PropTypes.oneOf(['small', 'large']),
   style: stylePropTypes,
   stretch: PropTypes.bool,
-};
-
-Spinner.defaultProps = {
-  size: 'small',
-  style: null,
-  stretch: false,
 };
 
 export default Spinner;

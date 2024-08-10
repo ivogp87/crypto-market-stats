@@ -75,14 +75,4 @@ ExchangeInfo.propTypes = {
   description: PropTypes.string,
 };
 
-ExchangeInfo.defaultProps = {
-  tradeVolume: null,
-  established: null,
-  country: null,
-  homepage: null,
-  facebook: null,
-  twitter: null,
-  description: null,
-};
-
 export default ExchangeInfo;

@@ -64,12 +64,4 @@ SearchResults.propTypes = {
   onFavorite: PropTypes.func,
 };
 
-SearchResults.defaultProps = {
-  title: null,
-  btcExchangeRate: null,
-  referenceCurrency: null,
-  favoriteCoinIds: null,
-  onFavorite: null,
-};
-
 export default SearchResults;

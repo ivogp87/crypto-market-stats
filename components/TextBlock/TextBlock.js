@@ -44,8 +44,4 @@ TextBlock.propTypes = {
   style: stylePropTypes,
 };
 
-TextBlock.defaultProps = {
-  style: null,
-};
-
 export default TextBlock;

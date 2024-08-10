@@ -78,8 +78,4 @@ MarketPairCard.propTypes = {
   trustScore: PropTypes.string,
 };
 
-MarketPairCard.defaultProps = {
-  trustScore: null,
-};
-
 export default MarketPairCard;

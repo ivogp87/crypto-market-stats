@@ -89,9 +89,4 @@ Chart.propTypes = {
   error: PropTypes.bool,
 };
 
-Chart.defaultProps = {
-  data: null,
-  error: null,
-};
-
 export default Chart;

@@ -6,7 +6,14 @@ import { Ionicons, AntDesign } from '@expo/vector-icons';
 import themedStyles from './styles';
 import { useStyles, useColors } from '../../hooks';
 
-const SearchBar = ({ text, placeholder, isSearching, onChangeText, onSubmitEditing, onClear }) => {
+const SearchBar = ({
+  text,
+  placeholder = 'Search',
+  isSearching,
+  onChangeText,
+  onSubmitEditing,
+  onClear,
+}) => {
   const styles = useStyles(themedStyles);
   const colors = useColors();
 
@@ -66,11 +73,6 @@ SearchBar.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   onSubmitEditing: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
-};
-
-SearchBar.defaultProps = {
-  placeholder: 'Search',
-  isSearching: false,
 };
 
 export default SearchBar;

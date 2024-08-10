@@ -7,7 +7,7 @@ import { stylePropTypes } from '../../utils';
 
 import AppButton from '../AppButton';
 
-const ButtonGroup = ({ children, color, style }) => {
+const ButtonGroup = ({ children, color = 'primary', style }) => {
   const styles = useStyles(themedStyles, color);
 
   return (
@@ -21,7 +21,7 @@ const ButtonGroup = ({ children, color, style }) => {
   );
 };
 
-const Item = ({ size, style, ...props }) => (
+const Item = ({ size = 'small', style, ...props }) => (
   <AppButton {...props} size={size} style={StyleSheet.compose(itemStyles.button, style)} />
 );
 
@@ -30,20 +30,10 @@ Item.propTypes = {
   style: stylePropTypes,
 };
 
-Item.defaultProps = {
-  size: 'small',
-  style: null,
-};
-
 ButtonGroup.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.oneOf(['primary', 'secondary']),
   style: stylePropTypes,
-};
-
-ButtonGroup.defaultProps = {
-  color: 'primary',
-  style: null,
 };
 
 ButtonGroup.Item = Item;

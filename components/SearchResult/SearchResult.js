@@ -14,7 +14,7 @@ import Logo from '../Logo';
 const SearchResult = ({
   id,
   name,
-  symbol,
+  symbol = '',
   rank,
   iconUrl,
   price,
@@ -86,16 +86,6 @@ SearchResult.propTypes = {
   showBorder: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
   onFavorite: PropTypes.func,
-};
-
-SearchResult.defaultProps = {
-  symbol: '',
-  rank: null,
-  price: null,
-  referenceCurrency: null,
-  showBorder: false,
-  isFavorite: false,
-  onFavorite: null,
 };
 
 export default SearchResult;

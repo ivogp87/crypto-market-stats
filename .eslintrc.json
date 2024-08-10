@@ -17,6 +17,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-props-no-spreading": [1, { "custom": "ignore" }],
     "camelcase": "off",
-    "react/prop-types": ["error", { "ignore": ["navigation", "route"] }]
+    "react/prop-types": ["error", { "ignore": ["navigation", "route"] }],
+    "react/require-default-props": [0]
   }
 }

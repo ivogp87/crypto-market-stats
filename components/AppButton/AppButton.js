@@ -11,9 +11,9 @@ const AppButton = ({
   onPress,
   iconLeft,
   iconRight,
-  size,
-  color,
-  variant,
+  size = 'medium',
+  color = 'primary',
+  variant = 'solid',
   rounded,
   stretch,
   style,
@@ -44,17 +44,6 @@ AppButton.propTypes = {
   rounded: PropTypes.bool,
   stretch: PropTypes.bool,
   style: stylePropTypes,
-};
-
-AppButton.defaultProps = {
-  iconLeft: null,
-  iconRight: null,
-  size: 'medium',
-  color: 'primary',
-  variant: 'solid',
-  rounded: false,
-  stretch: false,
-  style: null,
 };
 
 export default AppButton;

@@ -85,9 +85,4 @@ CoinInfo.propTypes = {
   allTimeLow: PropTypes.number.isRequired,
 };
 
-CoinInfo.defaultProps = {
-  totalSupply: null,
-  maxSupply: null,
-};
-
 export default CoinInfo;

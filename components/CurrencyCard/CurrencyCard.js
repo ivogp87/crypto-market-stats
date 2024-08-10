@@ -48,8 +48,4 @@ CurrencyCard.propTypes = {
   onPress: PropTypes.func.isRequired,
 };
 
-CurrencyCard.defaultProps = {
-  logoUrl: null,
-};
-
 export default CurrencyCard;

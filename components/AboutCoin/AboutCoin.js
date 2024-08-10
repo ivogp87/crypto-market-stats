@@ -87,9 +87,4 @@ AboutCoin.propTypes = {
   }),
 };
 
-AboutCoin.defaultProps = {
-  description: null,
-  links: null,
-};
-
 export default AboutCoin;
