@@ -27,7 +27,7 @@ const AboutUs = () => {
       <Heading iconName="information-circle">About</Heading>
       <View style={styles.aboutUs}>
         <Link
-          href="mailto:hello@cryptomarketstats.net"
+          href="mailto:cryptomarketstats@ivo.xyz"
           target="browser"
           size="large"
           style={styles.link}
@@ -46,7 +46,7 @@ const AboutUs = () => {
           Share App
         </AppText>
         <Link
-          href="https://cryptomarketstats.net/privacy-policy.html"
+          href="https://cryptomarketstats.ivo.xyz/privacy-policy.html"
           size="large"
           style={styles.link}
         >
